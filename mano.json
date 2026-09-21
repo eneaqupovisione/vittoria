@@ -1,0 +1,15 @@
+{
+ "nota": "artefatto di costruisci-mano.sh \u2014 non si modifica a mano",
+ "scoperto": 0.0586,
+ "coperto": 0.3689,
+ "fotogrammi": 97,
+ "fuoco": [
+  0.4688,
+  0.6178
+ ],
+ "pieno": 0.3125,
+ "mano": [
+  1.0,
+  0.9062
+ ]
+}
