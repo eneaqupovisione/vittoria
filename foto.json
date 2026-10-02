@@ -1,0 +1,292 @@
+{
+ "nota": "ARTEFATTO: lo fa porta-le-foto.sh. Non si modifica a mano.",
+ "misure": [
+  450,
+  900,
+  1800
+ ],
+ "settori": [
+  {
+   "id": "moda",
+   "dove": "stanza",
+   "muro": 7,
+   "nome": {
+    "it": "Moda",
+    "en": "Fashion"
+   },
+   "ruolo": {
+    "it": "Fotografia e art direction",
+    "en": "Photography and art direction"
+   },
+   "settore": {
+    "it": "Editoriale · Creazioni d'artista",
+    "en": "Editorial · An artist's own pieces"
+   },
+   "foto": [
+    {
+     "id": "moda/01",
+     "w": 3754,
+     "h": 5631,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#B6B2BB",
+     "sorgente": "telefono4.jpg"
+    },
+    {
+     "id": "moda/02",
+     "w": 3880,
+     "h": 5820,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#2E3135",
+     "sorgente": "telefono2.jpg"
+    },
+    {
+     "id": "moda/03",
+     "w": 3729,
+     "h": 5593,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#706B75",
+     "sorgente": "prog venez7908.jpg"
+    },
+    {
+     "id": "moda/04",
+     "w": 3754,
+     "h": 4692,
+     "ar": 0.8001,
+     "verso": "verticale",
+     "colore": "#CBCAD4",
+     "sorgente": "prog venez7669.jpg"
+    },
+    {
+     "id": "moda/05",
+     "w": 3931,
+     "h": 5897,
+     "ar": 0.6666,
+     "verso": "verticale",
+     "colore": "#D9D8E6",
+     "sorgente": "prog venez7606.jpg"
+    },
+    {
+     "id": "moda/06",
+     "w": 3544,
+     "h": 4430,
+     "ar": 0.8,
+     "verso": "verticale",
+     "colore": "#D1D0DC",
+     "sorgente": "prog venez7627.jpg"
+    },
+    {
+     "id": "moda/07",
+     "w": 3729,
+     "h": 5593,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#5B535C",
+     "sorgente": "prog venez7995.tif"
+    },
+    {
+     "id": "moda/08",
+     "w": 1356,
+     "h": 1695,
+     "ar": 0.8,
+     "verso": "verticale",
+     "colore": "#9A8683",
+     "sorgente": "prog venez7671.tif"
+    },
+    {
+     "id": "moda/09",
+     "w": 3754,
+     "h": 4692,
+     "ar": 0.8001,
+     "verso": "verticale",
+     "colore": "#A9A7B0",
+     "sorgente": "prog venez7749.jpg"
+    },
+    {
+     "id": "moda/10",
+     "w": 3722,
+     "h": 5583,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#4D6E4F",
+     "sorgente": "prog venez7934.tif"
+    },
+    {
+     "id": "moda/11",
+     "w": 3997,
+     "h": 4997,
+     "ar": 0.7999,
+     "verso": "verticale",
+     "colore": "#D6D7E3",
+     "sorgente": "prog venez7620.jpg"
+    },
+    {
+     "id": "moda/12",
+     "w": 3257,
+     "h": 4071,
+     "ar": 0.8,
+     "verso": "verticale",
+     "colore": "#CED5CC",
+     "sorgente": "prog venez7790.tif"
+    },
+    {
+     "id": "moda/13",
+     "w": 3722,
+     "h": 5583,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#B3DAB4",
+     "sorgente": "prog venez7871.tif"
+    },
+    {
+     "id": "moda/14",
+     "w": 3729,
+     "h": 5593,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#57535A",
+     "sorgente": "prog venez7920.jpg"
+    },
+    {
+     "id": "moda/15",
+     "w": 3738,
+     "h": 5608,
+     "ar": 0.6665,
+     "verso": "verticale",
+     "colore": "#89AB94",
+     "sorgente": "prog venez8006.tif"
+    },
+    {
+     "id": "moda/16",
+     "w": 3207,
+     "h": 4009,
+     "ar": 0.8,
+     "verso": "verticale",
+     "colore": "#33CE33",
+     "sorgente": "prog venez8051.tif"
+    }
+   ]
+  },
+  {
+   "id": "fuori",
+   "dove": "stanza",
+   "muro": 6,
+   "nome": {
+    "it": "Fuori",
+    "en": "Outside"
+   },
+   "ruolo": {
+    "it": "Fotografia e art direction",
+    "en": "Photography and art direction"
+   },
+   "settore": {
+    "it": "Lookbook per un negozio",
+    "en": "Lookbook for a store"
+   },
+   "foto": [
+    {
+     "id": "fuori/01",
+     "w": 3497,
+     "h": 2623,
+     "ar": 1.3332,
+     "verso": "orizzontale",
+     "colore": "#88847E",
+     "sorgente": "computer.jpg"
+    },
+    {
+     "id": "fuori/02",
+     "w": 4212,
+     "h": 6318,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#706E6D",
+     "sorgente": "telefono1.jpg"
+    },
+    {
+     "id": "fuori/03",
+     "w": 3354,
+     "h": 4472,
+     "ar": 0.75,
+     "verso": "verticale",
+     "colore": "#7E7A73",
+     "sorgente": "100_0835.jpg"
+    },
+    {
+     "id": "fuori/04",
+     "w": 4617,
+     "h": 6926,
+     "ar": 0.6666,
+     "verso": "verticale",
+     "colore": "#9A9A99",
+     "sorgente": "IMG_5188.jpg"
+    },
+    {
+     "id": "fuori/05",
+     "w": 4640,
+     "h": 6960,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#646362",
+     "sorgente": "IMG_5399.jpg"
+    },
+    {
+     "id": "fuori/06",
+     "w": 5184,
+     "h": 3456,
+     "ar": 1.5,
+     "verso": "orizzontale",
+     "colore": "#706F6E",
+     "sorgente": "IMG_5431.jpg"
+    }
+   ]
+  },
+  {
+   "id": "sparse",
+   "dove": "corridoio",
+   "muro": 3,
+   "nome": {
+    "it": "Sparse",
+    "en": "Loose"
+   },
+   "ruolo": {
+    "it": "Fotografia e art direction",
+    "en": "Photography and art direction"
+   },
+   "settore": {
+    "it": "Una per volta",
+    "en": "One at a time"
+   },
+   "foto": [
+    {
+     "id": "sparse/01",
+     "w": 3992,
+     "h": 5988,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#272625",
+     "sorgente": "IMG_6257.jpg"
+    },
+    {
+     "id": "sparse/02",
+     "w": 876,
+     "h": 657,
+     "ar": 1.3333,
+     "verso": "orizzontale",
+     "colore": "#3E201A",
+     "sorgente": "G66.png"
+    },
+    {
+     "id": "sparse/03",
+     "w": 3491,
+     "h": 5236,
+     "ar": 0.6667,
+     "verso": "verticale",
+     "colore": "#0C0D0E",
+     "sorgente": "DSC02479.jpg"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2213 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vittoria — Fotografia e art direction</title>
+<meta name="description" content="Fotografia e art direction per la moda: editoriali, lookbook e campagne.">
+<meta name="theme-color" content="#242D33">
+<!-- L'ANTEPRIMA DEL LINK. Chi legge queste righe e' un programma - WhatsApp,
+     Telegram, una chat - e i programmi non aspettano che il copione giri:
+     qui sta scritto in italiano, e l'indirizzo dell'immagine e' per intero,
+     perche' fuori di qui "anteprima.jpg" non vuol dire niente.
+     L'immagine la fa porta-le-foto.sh dalla fotografia d'apertura. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vittoria — Fotografia e art direction">
+<meta property="og:description" content="Fotografia e art direction per la moda: editoriali, lookbook e campagne.">
+<meta property="og:image" content="https://eneaqupovisione.github.io/vittoria/anteprima.jpg">
+<meta property="og:url" content="https://eneaqupovisione.github.io/vittoria/">
+<meta name="twitter:card" content="summary_large_image">
+<!-- L'ICONA: la V del nome, bianca sulla penombra. Sta qui dentro e non in
+     un file, cosi' non c'e' un'altra cosa da ricordarsi di pubblicare. -->
+<!-- IL PRIMO FOGLIO DELLA MANO SI CHIEDE SUBITO. Senza, il browser lo
+     scopre solo dopo aver letto hero.js e mano.json: due viaggi di ritardo
+     su quello che si deve vedere per primo. -->
+<link rel="preload" as="image" href="mano/foglio-1.webp">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23242D33'/><path d='M7 9 L16 24 L25 9' fill='none' stroke='%23F2F2F0' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<style>
+  :root {
+    color-scheme: dark;
+    /* IL FONDO e' la penombra della fotografia, misurata in cima
+       all'originale: srgb(36,45,51). Non e' nero pieno, e non deve
+       esserlo — la lastra si spegne in questo colore ai bordi
+       (costruisci-scuro.sh), e se qui cambia, va cambiato anche li' e la
+       lastra rifatta. */
+    --fondo:    #242D33;
+    --segno:    #FFFFFF;            /* il colore del disegnato */
+    /* IL COMPOSTO non e' bianco pieno: i disegni sono la voce alta, e se
+       il titolo li pareggia si mettono a gridare tutti e due. */
+    --composto: #E4E1DB;
+    /* LA FIRMA NON E' DEL COLORE DEL DISEGNATO, e non e' nemmeno una
+       versione piu' spenta: e' un altro colore. Chiaro come i disegni si
+       leggeva come un settimo disegno, e il nome finiva in fila con "bio"
+       e "collab" invece di stare sotto a tutti. Questo grigio-azzurro e'
+       preso dalla luce che batte sul pavimento della fotografia: sta nel
+       mondo dello scatto, non in quello del pennarello. */
+    --firma: #5B7383;
+    /* IL LUSTRO: il colpo di luce che passa sul nome una volta sola, alla
+       fine dell'accensione. E' il bianco della lampada che sta dietro le
+       spalle nella fotografia, non il bianco del pennarello: il nome non
+       diventa un disegno nemmeno per un istante. */
+    --lustro: #E7F0F6;
+    /* IL CUORE E' ROSSO, e solo lui fra i sei. Sta sul petto di lei, ed e'
+       l'unico dei disegni che non indica una porta ma una cosa che si fa in
+       due: un colore suo lo dice senza scriverlo. E' il rosso di casa,
+       alzato quanto basta per tenere sul buio. LA PAROLA NO: quella resta
+       chiara come le altre cinque, se no non e' un cuore rosso appuntato
+       addosso, e' una voce di menu colorata. */
+    --cuore:    #F5332A;
+    /* IL MURO del filmato d'ingresso: nel video il fondo e' stato portato a
+       bianco pieno dal generatore, cosi' il vuoto di fianco e' un colore
+       solo e combacia. Non c'entra col fondo della pagina — sono due scene
+       diverse, e fra le due ci sta il buio. */
+    --muro:     #FFFFFF;
+    /* IL CARATTERE. Didot e' la didone delle testate di moda, e su questa
+       macchina c'e'. Dietro Bodoni, che e' la stessa famiglia di idee, poi
+       due che si trovano spesso installate, poi Georgia che c'e' dappertutto.
+       Il contrasto col pennarello e' il punto: una cosa tracciata a mano e
+       una composta. */
+    --titolo: "Didot", "Bodoni 72", "Bodoni MT", "Playfair Display",
+              "Cormorant Garamond", "Big Caslon", Georgia, serif;
+    /* LO STAMPATELLO, dal 21 settembre 2026: i TITOLI - il nome, la testa
+       delle stanze, i titoli dei lavori - sono in un bastoni tutto
+       maiuscolo, e il Didot resta a quel che si legge.
+       BASSO E LARGO, non alto e stretto: e' il carattere di sistema (SF Pro
+       su Mac e iPhone) nella sua larghezza "expanded", nerissimo. Il DIN
+       Condensed, provato per primo, era troppo alto. La larghezza non sta
+       nel nome del carattere: va chiesta con font-stretch, dove si usa. */
+    --stampatello: system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    /* DOVE LA FOTOGRAFIA ENTRA NEL FONDO. Sulla lastra scura questi non
+       servono: l'orlo e' spento dentro l'immagine, dove si sa quanto vale
+       ogni bordo. Restano perche' la macchina e' la stessa, e una lastra
+       che dovesse sfumare qui saprebbe come. */
+    --sfuma-alto: 0%;
+    --sfuma-basso: 100%;
+    --sfuma-coda: 10%;
+    --sfuma-sx: 0%;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--fondo); overflow:hidden; }
+  /* IL CORPO E' POSIZIONATO, e serve a tagliare. Sul foglio alto la figura
+     sborda di trecento unita' per parte: senza, il suo riquadro contava come
+     pagina, il telefono si faceva largo 537 invece di 375 e rimpiccioliva
+     tutto per starci - il nome finiva sotto lo schermo e restavano i
+     margini. Cosi' il foglio sta dentro il corpo, e il corpo taglia. */
+  body { position:relative; }
+  /* niente gesti del browser ai bordi: su un trackpad due dita di lato sono
+     "indietro", e dentro una stanza facevano uscire */
+  html, body { overscroll-behavior:none; }
+  body { font:400 13px/1.5 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+         -webkit-font-smoothing:antialiased; }
+
+  /* IL FOGLIO. La composizione e' disegnata su misure fisse, come su un
+     tavolo, e poi tutta rimpicciolita per stare nella finestra: cosi' non
+     si scompone mai. I fogli sono due, uno largo e uno alto — non lo
+     stesso foglio strizzato, che sul telefono lascerebbe la figura
+     minuscola in mezzo alla penombra. */
+  /* LA STANZA DI look!: il campo di riquadri, DIETRO ai disegni — il
+     disegno scelto resta bianco davanti, ed e' lui la via del ritorno. */
+  #campo { position:fixed; inset:0; width:100%; height:100%; display:block;
+           z-index:0; opacity:0; transition:opacity .9s ease; touch-action:none; }
+  /* la stanza si accende DOPO che la pagina ha finito di cambiare colore
+     (.2 di attesa + .45 di passaggio): accesa prima, il suo nero saliva
+     sopra il grigio, e le fotografie ci passavano attraverso velate */
+  #campo.visibile { opacity:1; transition:opacity .9s ease .6s; }
+  /* uscendo invece se ne va in fretta: e' il piano che torna, e i disegni
+     non devono riapparire sopra le fotografie ancora accese */
+  #campo { transition:opacity .35s ease; }
+
+  /* LA PAGINA DI UN SET: l'elica, dietro a tutto come il campo. */
+  #elica { position:fixed; inset:0; width:100%; height:100%; display:block;
+           z-index:0; opacity:0; transition:opacity .9s ease; touch-action:none; }
+  #elica.visibile { opacity:1; transition-delay:.6s; }
+
+  /* LA STANZA DI showroom: i provini stanno DENTRO il foglio, cosi'
+     seguono la sua scala senza doverla ricalcolare. */
+  /* I bordi sfumano. In una galleria le fotografie di lato sbordano per
+     forza; tagliate di netto sembrano un errore, sfumate sono una scelta -
+     la stessa cosa che fa la figura sul piano. */
+  #provini { position:absolute; inset:0; z-index:1; pointer-events:auto;
+             opacity:0; transition:opacity .8s ease;
+             -webkit-mask-image:linear-gradient(to right, transparent 0, #000 8%,
+                                                #000 92%, transparent 100%);
+             mask-image:linear-gradient(to right, transparent 0, #000 8%,
+                                        #000 92%, transparent 100%);
+             /* NO-REPEAT, e non e' pignoleria: una maschera CSS di default
+                si RIPETE fuori dal suo riquadro, quindi quel che sporge dal
+                foglio tornerebbe visibile invece di sparire. Senza questa
+                riga la sfumatura ai bordi non serve a niente. */
+             -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
+  #provini.visibile { opacity:1; }
+  #provini .provino { position:absolute; left:0; top:0; transform-origin:50% 50%;
+                      cursor:pointer;
+                      transition:transform .55s cubic-bezier(.2,.8,.25,1),
+                                 opacity .45s ease; }
+  #provini .scatto  { position:absolute; inset:0; }
+  #provini .cornice { position:absolute; color:var(--segno); pointer-events:none; }
+  /* LA DIDASCALIA. Sta DENTRO il provino, quindi si rimpicciolisce e
+     sbiadisce insieme a lui: quella al centro si legge, le altre accennano.
+     Stesso carattere del titolo, stesso grassetto, stessa spaziatura. */
+  /* DUE SCRITTE, UNA SOPRA E UNA SOTTO, e la gerarchia e' rovesciata
+     rispetto a come verrebbe di farla. Il TITOLO del lavoro sta sopra,
+     piccolo e spaziato largo: e' un'etichetta, dice di che album si tratta.
+     Il RUOLO sta sotto, grande e in grassetto, perche' in un portfolio e'
+     quello che conta - "una foto" non dice niente, "art direction e
+     fotografia" dice tutto. */
+  #provini .sopra, #provini .sotto {
+    position:absolute; left:0; right:0; margin:0; text-align:center;
+    white-space:nowrap; font-family:var(--titolo); line-height:1.2;
+    pointer-events:none; }
+  /* il titolo del lavoro: in stampatello, bianco come il disegnato */
+  #provini .sopra { color:var(--segno); font-family:var(--stampatello); font-weight:800;
+                    font-stretch:expanded;
+                    text-transform:uppercase; letter-spacing:.03em; text-indent:.03em;
+                    line-height:1; }
+  #provini .sopra svg { display:block; height:100%; width:auto; margin:0 auto;
+                        overflow:visible; }
+  #provini .sotto { font-weight:700; text-transform:uppercase;
+                    letter-spacing:.05em; text-indent:.05em; color:var(--composto); }
+  #provini .cornice svg { display:block; width:100%; height:100%; overflow:visible; }
+
+  /* IL VELO DELLA TESTA. Il titolo e la freccia sono chiari: nel campo puo'
+     capitargli sotto un riquadro chiaro, e sparirebbero proprio mentre sono
+     l'unico modo di uscire. Una fascia del colore della pagina che sfuma
+     verso il basso li tiene leggibili, e non si vede come un rettangolo.
+     I numeri sono --fondo scritto per esteso: in un gradiente serve la
+     stessa tinta con due trasparenze, e una variabile non si sa dividere. */
+  /* IL VELO DELLA TESTA STA SULLO SCHERMO, non dentro il foglio. Dentro il
+     foglio era largo quanto la composizione: finche' era del colore della
+     pagina non si vedeva, ma da quando una stanza lo veste di nero o di
+     bianco diventava un RIQUADRO in mezzo allo schermo, con due bordi netti
+     e l'aria di un caricamento. */
+  #velo-testa { position:fixed; left:0; right:0; top:0; z-index:1;
+                pointer-events:none; opacity:0; transition:opacity .5s ease;
+                background:linear-gradient(to bottom,
+                  rgba(36,45,51,.97) 38%, rgba(36,45,51,0) 100%); }
+  body.dentro #velo-testa { opacity:1; }
+  /* UNA STANZA PUO' VESTIRE LA TESTA. Dopo l'ingresso nel sito esistono solo
+     il bianco e il nero: il campo e' buio, lo showroom e' una galleria
+     bianca, e il titolo, la freccia e il francobollo devono starci sopra.
+     La stanza dice due colori (PIANO.veste) e la testa li porta. */
+  /* E LA PAGINA SOTTO PRENDE IL COLORE DELLA STANZA. Mentre la tela della
+     stanza si accende, dietro c'era il grigio della penombra: si vedeva
+     comparire un rettangolo su un fondo di un altro colore. Cosi' invece il
+     fondo e' gia' quello giusto, e quel che si accende sopra ci scivola
+     dentro. Il grigio resta solo all'ingresso, che e' il colore del
+     fondale della fotografia. */
+  body.vestita { background-color:var(--stanza-fondo); }
+  /* E IL FONDO ASPETTA LA FIGURA (30 settembre 2026). La lastra ha l'orlo
+     cotto nel grigio della penombra: se la pagina diventa nera mentre lei
+     c'e' ancora, il suo rettangolo grigio si vede sul nero - il grigio che
+     "ci si porta dietro". Allora in fila: la figura se ne va in un quinto di
+     secondo, poi il fondo cambia, poi la stanza si accende. Tornando, il
+     contrario: prima il fondo torna grigio, poi lei. */
+  /* IL SIPARIO (30 settembre 2026, secondo giro). Mettere in fila i tempi
+     non bastava: il fondo della pagina, quello del documento sotto di lei e
+     il velo della testa cambiavano colore ognuno per conto suo, e per un
+     istante uno stava dentro l'altro come un rettangolo. Adesso entrando (e
+     uscendo) un velo a tutto schermo del colore di arrivo copre tutto in un
+     quinto di secondo; sotto, coperti, i fondi cambiano DI SCATTO e tutti
+     insieme; poi il velo si ritira. Non c'e' piu' un momento in cui due
+     colori si vedono accanto. */
+  html.vestita { background-color:var(--stanza-fondo); }
+  html, body { transition:background-color 0s linear .22s; }
+  #sipario { position:fixed; inset:0; z-index:4; pointer-events:none; opacity:0;
+             background:var(--sipario, var(--fondo)); }
+  #sipario.va { animation:sipario .8s ease both; }
+  @keyframes sipario { 0% { opacity:0; } 26% { opacity:1; } 42% { opacity:1; }
+                       100% { opacity:0; } }
+  @media (prefers-reduced-motion: reduce) { #sipario.va { animation-duration:.3s; } }
+  #figura { transition:opacity .35s ease .6s; }
+  body.dentro #figura { transition:opacity .18s ease; }
+  body.dentro #firma { transition:opacity .2s ease, color .9s ease; }
+  body.vestita #titolo { color:var(--stanza-tratto); }
+  body.vestita #indietro, body.vestita #scrivimi { color:var(--stanza-tratto); }
+  body.vestita #velo-testa {
+    background:linear-gradient(to bottom, var(--stanza-fondo) 34%, var(--stanza-velo) 100%); }
+
+  /* IL TITOLO. In alto al centro, composto: maiuscolo, spaziato largo.
+     Il rientro pareggia l'ultima spaziatura, se no la parola resta spostata
+     a sinistra di mezzo spazio - in un titolo centrato si vede. */
+  #titolo { position:absolute; left:0; right:0; z-index:3; margin:0; text-align:center;
+            font-family:var(--stampatello); font-weight:800; font-stretch:expanded;
+            color:var(--composto);
+            text-transform:uppercase; letter-spacing:.02em; text-indent:.02em;
+            line-height:1; white-space:nowrap; opacity:0; pointer-events:none;
+            transition:opacity .5s ease .15s; }
+  body.dentro #titolo { opacity:1; }
+
+  /* IL FRANCOBOLLO. Dentro una stanza, in basso a destra: l'unica cosa
+     sempre a portata, perche' e' l'unica che e' un'AZIONE. Le altre
+     sezioni stanno sul piano, che e' la mappa. */
+  #scrivimi { position:absolute; z-index:3; display:none; padding:0; margin:0;
+              border:0; background:none; color:var(--segno); cursor:pointer;
+              pointer-events:auto; -webkit-tap-highlight-color:transparent;
+              transform:rotate(2deg);
+              transition:transform .28s cubic-bezier(.2,.9,.25,1), opacity .4s ease; }
+  #scrivimi svg { display:block; width:100%; height:100%; overflow:visible; }
+  body.dentro #scrivimi { display:block; }
+  /* in showroom no: il giro finisce nella stanza della posta, e la busta
+     c'e' gia' li', con "scrivimi" */
+  body.dentro[data-stanza="showroom.svg"] #scrivimi { display:none; }
+  #scrivimi:hover, #scrivimi:focus-visible { outline:none; }
+  @media (hover: none) { #scrivimi:hover { transform:rotate(2deg); } }
+  /* LA PORTA CHE SI APRE (costruisciPorta) e il suo volo (apriLaPorta) */
+  .pp-quadro { position:relative; display:block; height:100%; aspect-ratio:705.4 / 1084;
+               perspective:380px; perspective-origin:50% 35%; }
+  .pp-quadro > svg, .pp-anta > svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .pp-vano { position:absolute; inset:0; background:#F7F6F4;
+             -webkit-mask:url(porta-vano.png) center / 100% 100% no-repeat;
+             mask:url(porta-vano.png) center / 100% 100% no-repeat; }
+  .pp-anta { position:absolute; inset:0; will-change:transform; transition:color .25s ease; }
+  .pp-strato { position:fixed; inset:0; z-index:60; pointer-events:none; }
+  .pp-scatta .pp-anta { transition:transform .3s ease-out, color .3s; }
+  .pp-scatta .pp-vano { transition:opacity .3s ease-out; }
+  .pp-volo { will-change:transform; }
+  /* I DUE STRATI (dueStrati): fuori dal piano la carezza muove solo .tratto */
+  .dis { position:relative; display:block; height:100%; }
+  .dis .tratto { display:block; height:100%; transition:transform .28s cubic-bezier(.2,.9,.25,1); }
+  .dis .parola { position:absolute; left:0; top:0; width:100%; height:100%; }
+  .dis .parola svg { width:100% !important; height:100% !important; }
+  #scrivimi .dis, .angolo .dis { width:100%; }
+  #scrivimi:hover .tratto, #scrivimi:focus-visible .tratto,
+  .angolo:hover .tratto, .angolo:focus-visible .tratto { transform:translateY(-8px) scale(1.07); }
+  /* GLI ANGOLI DI LOOK! (2 ottobre 2026): nel campo, oltre alla freccia in
+     alto a sinistra e alla busta in alto a destra, la porta di showroom in
+     basso a sinistra - l'angolo opposto alla busta - e il cuore in basso a
+     destra. Quattro angoli, quattro strade. Solo in look!. */
+  .angolo { position:absolute; z-index:3; display:none; padding:0; margin:0;
+            border:0; background:none; color:var(--segno); cursor:pointer;
+            pointer-events:auto; -webkit-tap-highlight-color:transparent;
+            transform:rotate(var(--gira, 0deg));
+            transition:transform .28s cubic-bezier(.2,.9,.25,1), opacity .4s ease; }
+  .angolo svg { display:block; width:100%; height:100%; overflow:visible; }
+  body.dentro[data-stanza="look.svg"] .angolo { display:block; }
+  .angolo:hover, .angolo:focus-visible { outline:none; }
+  /* la porta d'angolo: la porta e la sua parola sono due finestre separate,
+     cosi' la parola puo' essere grande quanto quella di mail mentre la porta
+     cresce per conto suo */
+  #angolo-porta { display:none; flex-direction:column; align-items:center; }
+  body.dentro[data-stanza="look.svg"] #angolo-porta { display:flex; }
+  #angolo-porta .tratto { display:block; flex:none; transition:transform .28s cubic-bezier(.2,.9,.25,1); transform-origin:50% 50%; }
+  #angolo-porta .tratto svg, #angolo-porta .nome svg { width:100%; height:100%; }
+  #angolo-porta .nome { display:block; flex:none; }
+  @media (hover: none) { .angolo:hover { transform:rotate(var(--gira, 0deg)); } }
+
+
+  /* LA PARALLASSE sta in tre variabili e in nessun altro posto: il foglio si
+     sposta di piu', la lastra di meno, la firma di pochissimo. Nessuna delle
+     tre ha una transizione — le scrive il copione a ogni fotogramma, ed e'
+     li' che si fa la morbidezza. */
+  #foglio, #foglio-davanti { z-index:1; position:absolute; top:50%; left:50%;
+            width:calc(var(--fl, 1400) * 1px); height:calc(var(--fa, 900) * 1px);
+            transform:translate(calc(-50% + var(--para-x, 0px)),
+                                calc(-50% + var(--para-y, 0px)))
+                      scale(var(--scala, 1));
+            transform-origin:center; }
+
+  /* LA FIGURA. I bordi si spengono nel fondo — ma sulla lastra scura lo
+     fanno DENTRO l'immagine, non qui: il fondo della fotografia e' vivo,
+     quasi nero in cima e schiarito sul pavimento, e una maschera verso una
+     tinta piatta lascerebbe l'alone. Le variabili restano a zero, e la
+     maschera con loro non taglia niente. */
+  #figura { position:absolute; user-select:none; -webkit-user-drag:none;
+            transform:translate(var(--fig-x, 0px), var(--fig-y, 0px));
+            /* LA CODA dice quanto e' lungo lo spegnimento in fondo. Lunga, la
+               figura si dissolve e sembra sospesa nel niente; corta, e' un
+               TAGLIO, cioe' un'inquadratura che finisce dove finisce lo
+               schermo — che e' quello che serve al piano americano sul
+               telefono. Stessa maschera, due mestieri. */
+            -webkit-mask-image:
+              linear-gradient(to bottom, transparent 0, #000 var(--sfuma-alto),
+                              #000 var(--sfuma-basso),
+                              transparent calc(var(--sfuma-basso) + var(--sfuma-coda, 10%))),
+              linear-gradient(to right, transparent 0, #000 var(--sfuma-sx), #000 100%);
+            -webkit-mask-composite:source-in;
+            mask-image:
+              linear-gradient(to bottom, transparent 0, #000 var(--sfuma-alto),
+                              #000 var(--sfuma-basso),
+                              transparent calc(var(--sfuma-basso) + var(--sfuma-coda, 10%))),
+              linear-gradient(to right, transparent 0, #000 var(--sfuma-sx), #000 100%);
+            mask-composite:intersect; }
+
+  /* LEI STA DAVANTI AL NOME, CON LE MANI (30 settembre 2026). La lastra non
+     puo' salire sopra la firma: ha l'orlo cotto nel grigio, e sul nome si
+     vedrebbe il rettangolo. Sopra ci va solo lei, scontornata
+     (costruisci-davanti.py), e solo dal 70% in giu', dove ci sono le mani:
+     i disegni restano davanti a tutto. Sta in un secondo foglio, gemello
+     del primo - stesse misure, stessa parallasse - perche' il primo e' un
+     piano solo: o tutto sopra al nome o tutto sotto. Solo sul foglio largo:
+     sul telefono il nome davanti alle gambe e' una copertina, e va bene. */
+  #foglio-davanti { z-index:2; pointer-events:none; }
+  /* SOLO LE MANI, non le gambe: le gambe cadono sulla seconda T e sulla O,
+     e davanti al nome lo mangiavano - VIT ORIA. La striscia di mezzo dello
+     scontorno (dal 37 al 63% della larghezza, dove ci sono solo le gambe)
+     resta dietro il nome; le mani stanno ai due lati, fuori. */
+  #davanti { position:absolute; display:none; user-select:none;
+             transform:translate(var(--fig-x, 0px), var(--fig-y, 0px));
+             -webkit-mask-image:linear-gradient(to right, #000 36%, transparent 38.5%,
+                                                transparent 61.5%, #000 64%);
+             mask-image:linear-gradient(to right, #000 36%, transparent 38.5%,
+                                        transparent 61.5%, #000 64%);
+             transition:opacity .35s ease .6s; }
+  /* entrando in una stanza se ne va con la lastra; durante l'arrivo non
+     c'e', e compare quando la lastra si e' posata */
+  body.dentro #davanti { opacity:0; transition:opacity .18s ease; }
+  body.prima #davanti, body.accende #davanti { opacity:0; }
+
+  /* IL CUORE E LA SUA PAROLA SONO UN TRATTO SOLO nel file, e non si possono
+     colorare separatamente - a meno di non tagliare il segno, che qui non si
+     fa mai. Ma fra i due c'e' una banda senza inchiostro, misurata: va dal
+     69,6% al 75,6% dell'altezza del disegno. Allora il tratto si riempie con
+     una sfumatura verticale che cambia colore DENTRO quella banda: sopra
+     rosso, sotto chiaro, e il salto casca nel vuoto, dove non c'e' niente da
+     vedere. Il segno non si tocca. */
+  #cuore-tinta .rosso  { stop-color:var(--cuore); }
+  #cuore-tinta .chiaro { stop-color:var(--segno); }
+  /* IN BIANCO E NERO (html.hero-bn) le fotografie sono chiare: i disegni
+     bianchi prendono un'ombra morbida per staccarsi dal fondo, e collab e'
+     rosso tutto, cuore e parola - e' l'unico colore della pagina */
+  html.hero-bn .sezione svg { filter:drop-shadow(0 1px 2px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(0,0,0,.35)); }
+  /* la parola collab sparisce, in tutte le versioni (2 ottobre 2026): il
+     cuore apre bio, e la parola avrebbe detto un'altra cosa. Lo spazio
+     della parola resta del bottone, e si tocca ancora. */
+  #cuore-tinta .chiaro { stop-color:var(--cuore); stop-opacity:0; }
+  /* IL BATTITO: due colpi vicini - tu-tum - e una pausa, come un cuore vero.
+     Batte il disegno, non il bottone: il bottone ha gia' la sua carezza. Il
+     centro e' il cuore, che sta nel terzo alto del disegno. */
+  html.hero-bn .sezione[aria-label="collab"] svg { transform-origin:50% 36%;
+    animation:battito 1.3s cubic-bezier(.3,.7,.4,1) infinite; }
+  @keyframes battito {
+    0%   { transform:scale(1); }
+    12%  { transform:scale(1.13); }
+    24%  { transform:scale(.98); }
+    36%  { transform:scale(1.08); }
+    55%, 100% { transform:scale(1); }
+  }
+  /* SUL TELEFONO PIU' LIEVE E DOLCE: il cuore li' e' grande e sta sul petto,
+     e il battito del computer sembrava un sobbalzo. Stessa forma del foglio
+     alto (piu' stretta che larga, come scegli()). */
+  @media (max-aspect-ratio: 9/10) {
+    html.hero-bn .sezione[aria-label="collab"] svg {
+      animation:battito-lieve 1.9s ease-in-out infinite; } }
+  @keyframes battito-lieve {
+    0%   { transform:scale(1); }
+    16%  { transform:scale(1.05); }
+    30%  { transform:scale(1.01); }
+    44%  { transform:scale(1.035); }
+    70%, 100% { transform:scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html.hero-bn .sezione[aria-label="collab"] svg { animation:none; } }
+  html.hero-bn #firma { filter:drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 18px rgba(0,0,0,.35)); }
+  #tinte { position:absolute; width:0; height:0; overflow:hidden; }
+
+  /* I DISEGNI, sopra il piano. */
+  .sezione { position:absolute; margin:0; padding:0; border:0; background:none;
+             color:var(--segno); cursor:pointer; -webkit-tap-highlight-color:transparent;
+             transform:rotate(var(--gira, 0deg));
+             /* la curva ha un filo di rimbalzo in coda: serve alla comparsa,
+                dove ogni disegno arriva a scatto, e non guasta alla carezza */
+             transition:transform .3s cubic-bezier(.34,1.56,.64,1),
+                        opacity .24s ease; }
+  /* overflow HIDDEN, e non e' un dettaglio: e' quello che fa funzionare
+     le due finestre sulla porta. Con visible ogni finestra dipingeva il
+     disegno intero invece del pezzo che le tocca. Si puo' chiudere senza
+     perdere niente: in tutti e sei l'inchiostro sta dentro il riquadro
+     con 42 unita' di margine — misurate. */
+  .sezione svg { display:block; width:100%; height:100%; overflow:hidden; }
+  /* LA CAREZZA. Non e' un ingrandimento e basta: quello parte dal centro,
+     e su un disegno grande il punto che si muove di meno e' proprio quello
+     sotto il puntatore — si muovono solo i bordi, lontani. Cosi' il disegno
+     piu' grande sembra morto mentre i piccoli saltano.
+     Allora: un'ALZATA uguale per tutti, che sposta ogni punto della stessa
+     quantita' e quindi si vede anche sotto il puntatore; e una crescita
+     tarata su --cresci, calcolata perche' ogni disegno cresca degli stessi
+     millimetri, non della stessa percentuale. */
+  /* SOLO IL DISEGNO (2 ottobre 2026): la carezza muove .tratto, la parola
+     resta dov'e'. Il bottone e' ancora tutto da toccare. */
+  .sezione .tratto, .sezione .parola { display:block; width:100%; height:100%; }
+  .sezione .parola { position:absolute; left:0; top:0; }
+  .sezione .tratto { transition:transform .3s cubic-bezier(.34,1.56,.64,1); }
+  /* LA PAROLA SOPRA (parolaSu nel posto): la parola sale in cima e il
+     disegno scende sotto di lei. Si sposta con translate, che e' una
+     proprieta' a se': la carezza (transform) continua a funzionare */
+  .sezione.su .parola { translate:0 calc(var(--disegno) * -100%); }
+  .sezione.su .tratto { translate:0 calc(var(--parola) * 100%); }
+  /* LA PORTA COL NOME SOTTO (parolaSotto): le due finestre si invertono,
+     prima la porta e poi la parola, com'e' nel file */
+  .sezione.giu { display:flex; flex-direction:column-reverse; }
+  .sezione:hover .tratto, .sezione:focus-visible .tratto {
+    transform:translateY(-10px) scale(var(--cresci, 1.07)); }
+  .sezione:focus-visible { outline:none; }
+  .sezione:active .tratto { transform:translateY(-3px) scale(1.015); }
+  /* col dito non esiste il "sopra": la carezza col mouse non deve restare
+     appiccicata dopo il tocco */
+  @media (hover: none) {
+    .sezione:hover .tratto { transform:none; }
+  }
+
+  /* Quando si entra, tutto il resto se ne va e resta la penombra. */
+  body.dentro #figura,
+  body.dentro .sezione { opacity:0; pointer-events:none; }
+  /* DENTRO UNA STANZA IL FOGLIO SMETTE DI PRENDERE. Non e' un dettaglio:
+     #foglio e' un div che copre tutto, e un div trasparente intercetta i
+     clic lo stesso — stando sopra la tela si mangiava trascinamenti e
+     rotella, e il campo sembrava morto. Restano vivi due soli bersagli:
+     il disegno scelto, che e' la via d'uscita, e la tela sotto. */
+  body.dentro #foglio { pointer-events:none; }
+  /* Dentro una stanza spariscono TUTTI i disegni, anche quello scelto:
+     in testa restano il titolo composto e la freccia. */
+
+  /* LA FRECCIA DEL RITORNO. Sta nel foglio, sotto il disegno dell'angolo,
+     e cresce e cala con lui. Fuori da una stanza non c'e'. */
+  #indietro { position:absolute; z-index:3; display:none; padding:0; margin:0;
+              border:0; background:none; color:var(--segno); cursor:pointer;
+              pointer-events:auto; -webkit-tap-highlight-color:transparent;
+              transform:rotate(-1.5deg);
+              transition:transform .28s cubic-bezier(.2,.9,.25,1), opacity .4s ease; }
+  #indietro svg { display:block; width:100%; height:100%; overflow:visible; }
+  body.dentro #indietro { display:block; }
+  #indietro:hover, #indietro:focus-visible {
+    transform:rotate(-1.5deg) translateX(-8px) scale(1.06); outline:none; }
+  @media (hover: none) { #indietro:hover { transform:rotate(-1.5deg); } }
+
+  /* Anche le dritte sono composte, in corsivo: la pagina ha due voci -
+     quella tracciata a mano, rossa, e quella tipografica, nera. */
+  /* LA FIRMA. Tutta la larghezza dello schermo, e l'ultimo quinto della
+     parola sotto il bordo. Non e' nel foglio ma nella finestra: "lunga
+     tutta la schermata" vuol dire la schermata, e il foglio e' piu' stretto.
+     Il taglio lo fa il viewBox, che si ferma all'80% dell'inchiostro. */
+  /* IL COLORE PASSA DA currentColor e non da fill diretto: durante il
+     pre-hero e' hero.js a scriverlo, riga per riga, seguendo quanto la
+     mano copre — e quando ha finito lo rimette a niente, cioe' torna
+     questo. La firma e' la stessa in tutte e due le scene: non ne
+     compare una seconda. */
+  /* LA FIRMA PUO' ESSERE PIU' LARGA DELLA FINESTRA. Sul telefono lo e': il
+     nome deborda dai due lati, e la V e la A si perdono oltre il bordo.
+     Piu' grande non si puo' fare altrimenti — e' gia' larga tutto lo
+     schermo, e crescere vuol dire uscire. */
+  #firma { position:fixed; left:50%; bottom:0; z-index:1; display:block;
+           width:var(--firma-l, 100%); fill:currentColor; color:var(--firma);
+           pointer-events:none;
+           transform:translate(calc(-50% + var(--fir-x, 0px)), var(--fir-y, 0px));
+           /* il colore ha la sua transizione perche' alla fine del pre-hero
+              la firma passa dal bianco pieno della mano al composto della
+              pagina: e' poca differenza, ma di scatto si vede */
+           transition:opacity .5s ease, color .9s ease; }
+  body.dentro #firma { opacity:0; }
+  /* IL NOME IN CIMA (firmaSu nel foglio): sul telefono in bianco e nero la
+     parte che conta della foto e' il fondo - le cinture, lei - e il cielo si
+     puo' coprire. Sotto la tacca, non dietro */
+  html.firma-su #firma { bottom:auto; top:calc(env(safe-area-inset-top, 0px) + var(--cornice, 6vw)); }
+  body.prima #firma { z-index:6; }
+
+  /* ------------------------------------------------------------------ *
+     LA CARTA.
+     Il fondo era una tinta piatta, e una tinta piatta e' uno schermo. Qui
+     sopra ci passa un fondale: una grana fitta e, sotto, delle macchie
+     larghe e lente — come la tela dipinta che sta dietro la modella, che
+     non e' mai di un colore solo.
+     NON E' UN FILE. E' rumore frattale fatto dal browser (feTurbulence),
+     due volte alla stessa maniera e a due misure diverse: nessun byte da
+     scaricare, nessuna piastrella che si ripete a occhio, e i numeri si
+     leggono qui invece che dentro un .png.
+     STA SOPRA A TUTTO, ed e' la ragione per cui funziona: la grana cade
+     sulla fotografia, sui disegni e sul nome insieme, quindi le tre cose
+     sembrano stampate sullo stesso foglio invece che incollate una
+     sull'altra. E siccome e' un velo che moltiplica la luce (soft-light) e
+     non una tinta, non sposta nessun colore: l'orlo della lastra resta
+     uguale alla pagina, che e' la cosa da non rompere mai.
+   * ------------------------------------------------------------------ */
+  #carta { position:fixed; inset:0; z-index:8; pointer-events:none;
+           mix-blend-mode:soft-light; opacity:.55;
+           background-image:
+             /* IL FONDALE E' PIU' SCURO AGLI ANGOLI, come una tela tesa e
+                illuminata da davanti. Serve anche a rimettere il fondo dove
+                stava: la grana da sola, che e' grigia, schiarisce tutto di
+                un velo, e il buio smetteva di essere buio. */
+             radial-gradient(ellipse 78% 88% at 50% 44%,
+               rgba(255,255,255,0) 38%, rgba(0,0,0,.42) 100%),
+             url("data:image/svg+xml;charset=utf-8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'>\
+<filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' \
+numOctaves='4' stitchTiles='stitch' seed='11'/>\
+<feColorMatrix type='saturate' values='0'/></filter>\
+<rect width='260' height='260' filter='url(%23g)'/></svg>"),
+             url("data:image/svg+xml;charset=utf-8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'>\
+<filter id='m'><feTurbulence type='fractalNoise' baseFrequency='0.006' \
+numOctaves='5' stitchTiles='stitch' seed='3'/>\
+<feColorMatrix type='saturate' values='0'/>\
+<feComponentTransfer><feFuncR type='linear' slope='1.7' intercept='-0.35'/>\
+<feFuncG type='linear' slope='1.7' intercept='-0.35'/>\
+<feFuncB type='linear' slope='1.7' intercept='-0.35'/>\
+</feComponentTransfer></filter>\
+<rect width='900' height='900' filter='url(%23m)'/></svg>");
+           background-size:100% 100%, 260px 260px, 900px 900px; }
+  /* la grana fine non deve accecare su uno schermo fitto: li' i puntini
+     sono meta' di un pixel vero e diventano un velo grigio uniforme */
+  @media (min-resolution: 2dppx) { #carta { opacity:.5; } }
+
+  /* ------------------------------------------------------------------ *
+     L'ARRIVO.
+     Quando la mano ha finito di chiudere non basta togliere il velo: la
+     pagina sarebbe semplicemente li'. Ma non ci va nemmeno un cerchio di
+     luce che si allarga — quello e' il diaframma del cinema muto, e si
+     vede che e' un effetto.
+     Qui non succede niente ALLA pagina: e' la pagina che arriva. La lastra
+     entra sfocata, un po' piu' piccola del dovuto, e si posa: la messa a
+     fuoco si chiude, il movimento in avanti che aveva cominciato la mano
+     continua fin qui e finisce. Fra le due scene non c'e' uno stacco,
+     c'e' lo stesso gesto che prosegue nel buio.
+     Nessun bordo puo' comparire: tutte e tre le cose che cambiano —
+     velatura, sfocatura, misura — lasciano l'orlo della lastra del colore
+     in cui la lastra si spegne, che e' quello della pagina.
+   * ------------------------------------------------------------------ */
+  /* le tre durate sono diverse apposta: e' quello che fa sembrare una cosa
+     posata invece che incollata. Il rapporto fra loro non si tocca — si
+     accorciano o si allungano tutte e tre insieme. */
+  /* LA TRANSIZIONE STA IN UNA CLASSE, e la classe se ne va quando l'arrivo
+     e' finito. Se restasse, la parallasse - che sposta la lastra a ogni
+     movimento del puntatore - si trascinerebbe dietro un secondo e mezzo di
+     ritardo, e sembrerebbe rotta. */
+  #figura.arriva { transition:opacity .62s ease-out,
+                              filter .72s cubic-bezier(.16,.86,.24,1),
+                              transform .9s cubic-bezier(.16,.86,.24,1); }
+  /* LA LASTRA ARRIVA DA PIU' GRANDE, non da piu' piccola. La mano ha appena
+     finito di stringere di cinque volte: la macchina sta ancora venendo
+     avanti, e se la scena dopo cominciasse piu' piccola e crescesse si
+     leggerebbe come un'inversione. Comincia larga e si posa, che e' la
+     macchina che rallenta invece di ripartire. */
+  body.accende #figura { opacity:0; filter:blur(26px);
+                         transform:translate(var(--fig-x,0px), var(--fig-y,0px))
+                                   scale(1.07); }
+  /* I DISEGNI ARRIVANO UNO PER VOLTA, a scatto, e non si accavallano:
+     ognuno finisce di comparire prima che cominci il successivo. L'ordine e'
+     sparso e scritto a mano (ORDINE, nel copione) — sparso ma sempre lo
+     stesso, perche' un caso vero cambierebbe a ogni visita e una cosa che si
+     vede una volta sola conviene sceglierla.
+     Partono piu' piccoli: la curva con il rimbalzo li fa arrivare oltre
+     misura e rientrare, ed e' quello che si legge come "comparso" invece che
+     "sbiadito dentro". */
+  body.accende .sezione { opacity:0;
+                          transform:rotate(var(--gira,0deg)) scale(.82); }
+  body.accende #firma { z-index:6; }
+  #lustro stop { stop-color:var(--firma); }
+  #lustro stop.colmo { stop-color:var(--lustro); }
+
+  /* ------------------------------------------------------------------ *
+     IL PRE-HERO. Il filmato della mano che chiude, DAVANTI al piano gia'
+     composto. Non e' un'altra pagina: se lo fosse, alla fine ci sarebbe
+     un caricamento proprio nel momento in cui non deve succedere niente.
+     Qui sotto il velo il piano c'e' gia', nello stesso colore, e quando
+     il velo se ne va non arriva niente di nuovo — si scopre quello che
+     c'era.
+     Si salta con un clic, o dall'indirizzo: piano.html?dritto.
+   * ------------------------------------------------------------------ */
+  #prima { position:fixed; inset:0; z-index:5; }
+  /* IL FONDALE, ed e' uno solo su tutto lo schermo.
+     Il muro del filmato e' stato portato a bianco pieno dal generatore, e il
+     filmato sta nella pagina IN MOLTIPLICAZIONE: dove e' bianco non fa
+     niente e si vede il fondale qui sotto, dove c'e' la figura la dipinge
+     sopra. Cosi' non ci sono un filmato e due bande di fianco - c'e' un
+     fondale grande quanto lo schermo, con lei in mezzo.
+     Le tinte sono quelle vere del muro, misurate dal generatore ai quattro
+     angoli e un po' schiarite: srgb(227,238,253) in cima, srgb(208,223,242)
+     in fondo, col colmo di luce che nello scatto batte in alto al centro. */
+  #scena { position:fixed; inset:0;
+           background:radial-gradient(ellipse 120% 90% at 50% 8%,
+             #F6F9FF 0%, #EAF0FC 38%, #DCE6F6 72%, #D2DEF2 100%); }
+
+  /* IL FILM. E' verticale e piccolo, 560 per 752: su uno schermo piu' largo
+     sta DENTRO, e quel che avanza di fianco e' fondale, non vuoto. Su uno
+     piu' stretto riempie - li' non avanza niente, e stare dentro lascerebbe
+     due bande in cima e in fondo con la figura piccola in mezzo. */
+  /* la tela della mano si ingrandisce fino a tre volte e mezza a ogni
+     giro di schermo: dirlo prima al browser gli fa preparare la superficie
+     una volta sola invece che rifarla a ogni fotogramma */
+  #film { will-change:transform; position:fixed; inset:0; width:100%; height:100%;
+          object-fit:cover; display:block; }
+  /* LA MOLTIPLICAZIONE VALE SOLO DOVE SERVE, cioe' dove il filmato sta
+     dentro e di fianco si vede il fondale. Su uno schermo stretto il
+     filmato copre tutto, il fondale non si vede, e la moltiplicazione non
+     servirebbe a niente — ma su iPhone un video con mix-blend-mode non si
+     vede affatto. Costava tutta la scena per un effetto che li' non ha
+     lavoro da fare. */
+  @media (min-aspect-ratio: 745/1000) {
+    #film { object-fit:contain; mix-blend-mode:multiply; }
+  }
+
+  /* IL NERO e' nero davvero: quando la mano tappa l'obiettivo non resta
+     penombra, resta il niente. Il piano poi si apre da li', e il nero se ne
+     va mentre la lastra arriva — due movimenti sovrapposti, non uno stacco. */
+  #nero { position:fixed; inset:0; background:#000;
+          pointer-events:none; opacity:1; }
+  #prima { transition:opacity .26s ease; }
+  #prima.via { opacity:0; }
+
+  .dritta { z-index:2; position:fixed; left:max(22px, env(safe-area-inset-left));
+            bottom:calc(20px + env(safe-area-inset-bottom));
+            margin:0; color:#7C868E; font-family:var(--stampatello); font-weight:800;
+            font-stretch:expanded; text-transform:uppercase;
+            font-size:11px; letter-spacing:.14em;
+            pointer-events:none; transition:opacity .6s ease; }
+  .dritta.via { opacity:0; }
+  /* LA DRITTA NON SI MOSTRA PIU' (2 ottobre 2026): "clicca un disegno" sopra
+     il nome non piaceva, ne' dove ne' come. I disegni si offrono da soli,
+     con la carezza. Il codice resta, se un giorno tornasse in un'altra forma. */
+  .dritta { display:none; }
+
+  #guasto { position:fixed; inset:0; place-content:center; padding:2rem; text-align:center;
+            color:var(--composto); max-width:34rem; margin:auto; line-height:1.7;
+            display:grid; }
+  #guasto[hidden] { display:none; }
+  #guasto code { background:rgba(255,255,255,.09); padding:.15em .45em;
+                 border-radius:3px; }
+
+  @media (prefers-reduced-motion: reduce) { .sezione { transition-duration:.01ms; } }
+</style>
+</head>
+<body>
+
+<!-- IL VELO STA FUORI DAL FOGLIO: il foglio ha una trasformazione, e un
+     position:fixed dentro una trasformazione si aggancia a lei e non allo
+     schermo - il velo veniva largo quanto il foglio, un riquadro. -->
+<div id="velo-testa"></div>
+<div id="foglio">
+  <img id="figura" src="piano-scuro.webp" alt="" draggable="false">
+  <button id="indietro" type="button" aria-label="indietro"></button>
+  <p id="titolo"></p>
+  <button id="scrivimi" type="button" aria-label="scrivimi"></button>
+  <button class="angolo" id="angolo-porta" type="button" aria-label="showroom"></button>
+  <button class="angolo" id="angolo-cuore" type="button" aria-label="bio"></button>
+</div>
+
+<div id="prima" hidden>
+  <div id="scena"><canvas id="film" aria-hidden="true"></canvas></div>
+  <div id="nero"></div>
+</div>
+
+<script src="scrivi.js"></script>
+<script src="hero.js"></script>
+
+<svg id="firma" aria-label="Vittoria" role="img">
+  <!-- IL LUSTRO. Cinque fermate: il colore della firma, poi una striscia
+       chiara, poi di nuovo il colore. La striscia si sposta da destra a
+       sinistra una volta sola, e il testo torna subito a currentColor —
+       il gradiente serve per un secondo, non e' come e' fatto il nome.
+       I colori stanno nel foglio di stile e non qui: un attributo di
+       presentazione non sa leggere una variabile. -->
+  <defs>
+    <linearGradient id="lustro" gradientUnits="objectBoundingBox"
+                    x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"></stop>
+      <stop id="lustro-a" offset="0"></stop>
+      <stop id="lustro-b" class="colmo" offset="0"></stop>
+      <stop id="lustro-c" offset="0"></stop>
+      <stop offset="1"></stop>
+    </linearGradient>
+  </defs>
+  <!-- LE DUE T SI TOCCAVANO: in stampatello largo e grasso le due sbarre
+       diventano una sola, e la coppia si leggeva come un pi greco. Il dx
+       sposta la seconda T di un filo (la quarta lettera), e il textLength
+       riassorbe lo spazio dagli altri vuoti: la parola resta larga uguale. -->
+  <text id="firma-testo" x="0" y="0" dx="0 0 0 7" textLength="1000" lengthAdjust="spacing"
+        font-family="system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+        font-stretch="expanded" font-weight="800" font-size="100">VITTORIA</text>
+</svg>
+
+<div id="foglio-davanti" aria-hidden="true">
+  <img id="davanti" src="piano-davanti.webp" alt="" draggable="false">
+</div>
+
+<svg id="tinte" aria-hidden="true"><defs>
+  <linearGradient id="cuore-tinta" gradientUnits="objectBoundingBox"
+                  x1="0" y1="0" x2="0" y2="1">
+    <stop class="rosso"  offset="0.72"></stop>
+    <stop class="chiaro" offset="0.73"></stop>
+  </linearGradient>
+</defs></svg>
+
+<div id="sipario" aria-hidden="true"></div>
+
+<div id="carta" aria-hidden="true"></div>
+
+<p class="dritta" id="dritta">tocca un disegno</p>
+
+<div id="guasto" hidden>
+  <p><strong>Il piano non si e' aperto.</strong></p>
+  <p>Se hai fatto doppio clic sul file, e' quello: i disegni si leggono con
+  <code>fetch</code>, e da <code>file://</code> non passa.
+  Apri <code>Apri le prove.command</code> invece.</p>
+</div>
+
+<script>
+(function () {
+'use strict';
+
+/* UNA MARCA CONTRO LA CACHE, MA SOLO MENTRE SI LAVORA.
+ * servi.py dice al browser di non conservare niente, ma quel che ha gia'
+ * conservato prima resta: si cambia un modulo, si ricarica, e gira ancora
+ * quello vecchio. La marca in coda a ogni file evita quel guaio.
+ * ONLINE PERO' FA IL DANNO OPPOSTO: con una marca nuova a ogni apertura
+ * nessun file viene mai riusato, e chi torna si riscarica due mega e mezzo
+ * di fotografie e di mano. Quindi la marca c'e' solo quando si sta sul
+ * server delle prove - localhost - e sul sito vero non c'e'. Con ?fresco
+ * si puo' chiederla lo stesso, per guardare una modifica appena mandata. */
+var LOCALE = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || !location.hostname;
+var MARCA = window.MARCA =
+  (LOCALE || /[?&]fresco\b/.test(location.search)) ? '?m=' + Date.now() : '';
+function fresco(f) { return f + MARCA; }
+
+/* LA LINGUA. Chi ha il browser in italiano legge in italiano, tutti gli
+ * altri in inglese: un francese capisce l'inglese prima dell'italiano.
+ * ?lingua=en nell'indirizzo lo forza, per guardarlo. Le stanze la leggono
+ * da qui (window.LINGUA). */
+var LINGUA = window.LINGUA = (function () {
+  var q = /[?&]lingua=(it|en)\b/.exec(location.search);
+  if (q) return q[1];
+  var l = (navigator.languages && navigator.languages[0]) || navigator.language || 'it';
+  return /^it\b/i.test(l) ? 'it' : 'en';
+})();
+document.documentElement.lang = LINGUA;
+/* il titolo della linguetta segue la lingua; l'anteprima del link no, quella
+   la legge un programma prima che questo copione giri */
+if (LINGUA === 'en') {
+  document.title = 'Vittoria — Photography and art direction';
+  var des = document.querySelector('meta[name="description"]');
+  if (des) des.content = 'Photography and art direction for fashion: editorials, lookbooks and campaigns.';
+}
+
+/* ------------------------------------------------------------------ *
+ * IL COLORE DEL SEGNO, per guardarlo invece di discuterlo.
+ *
+ * Tutti presi da DENTRO la fotografia, misurati sulla lastra e non scelti a
+ * mente. Il bianco pieno, che e' quello di adesso, ha un difetto che si puo'
+ * misurare: e' piu' chiaro del punto piu' luminoso dell'immagine, che vale
+ * F1F6F7. Nella stanza non esiste una luce cosi', ed e' per questo che i sei
+ * si leggono appiccicati sopra invece che accesi dentro.
+ *
+ * Cambiando questa variabile cambiano anche le stanze: il campo di riquadri
+ * e gli scarabocchi del set chiedono --segno alla pagina, non lo sanno da se'.
+ * ------------------------------------------------------------------ */
+/* I TRE QUASI-BIANCHI SONO UNA SCELTA SOLA, e non tre. Distano fra loro
+   pochi punti di luminosita', e su un tratto sottile in penombra e' una
+   differenza che non si vede. Restano scritti perche' la misura e' giusta -
+   il bianco pieno E' piu' chiaro della luce vera - ma non e' una differenza
+   che decide niente. La partita e' fra un chiaro neutro e un colore.
+   La paglia dell'immagine vale srgb(215,207,186), venticinque punti di caldo
+   appena: per vedersi come COLORE va spinta oltre quello che c'e' nello
+   scatto, ed e' quello che fa questa. */
+var SEGNI = {
+  bianco:  '#FFFFFF',   // piu' chiaro della luce vera della stanza
+  lampada: '#F1F6F7',   // il pannello dietro le spalle: il punto piu' chiaro
+  paglia:  '#EBD7A8',   // i suoi capelli, spinti finche' si vedono caldi
+  osso:    '#E9DCC4',   // a meta' strada, se la paglia grida troppo
+  rosso:   '#F4503F'    // il rosso di casa, alzato quanto basta per il buio
+};
+var vuolSegno = /[?&]segno=([a-z]+)/.exec(location.search);
+if (vuolSegno && SEGNI[vuolSegno[1]]) {
+  document.documentElement.style.setProperty('--segno', SEGNI[vuolSegno[1]]);
+}
+
+var foglio  = document.getElementById('foglio');
+var figura  = document.getElementById('figura');
+var davanti = document.getElementById('davanti');
+/* da dove comincia lo scontorno, in frazione della lastra: lo stesso DA di
+   costruisci-davanti.py */
+var DAVANTI = 0.70;
+/* DOVE STANNO LE MANI nella lastra, misurate sullo scontorno: la punta delle
+   dita della mano sinistra e' all'89% dell'altezza. */
+var MANI = 0.89;
+/* LE VERSIONI DELL'HERO (1 ottobre 2026). Quella di sempre e' MODA: la
+   fotografia in penombra, su tutti gli schermi. ?hero=bn e' la versione in
+   BIANCO E NERO, con due fotografie di Fuori: sul telefono la ragazza
+   stretta dalle cinghie (telefono1.jpg), al computer la foto larga dei due
+   che tirano il tessuto (computer.jpg). Tre versioni in tutto.
+   In bianco e nero cambia la tavolozza: la penombra azzurrata diventa un
+   grigio neutro (le lastre sono spente in quello: costruisci-scuro.sh con
+   ALLUNGA=0 e FONDO=#1B1B1B), il nome e' un grigio caldo invece del
+   grigio-azzurro, e il cuore e' piu' grande - al computer sta sul
+   tessuto, in mezzo ai due: e' il disegno di collab, la cosa che si fa in
+   due. Le posizioni sono nel foglio: si sovrascrivono a quelle di moda. */
+var HERI = {
+  bn: {
+    /* il nome bianco, con l'ombra dei disegni: grigio caldo sulle foto
+       chiare non si leggeva */
+    nome: 'bn', fondo: '#0E0E0E', firma: '#F4F1EC',   // 2 ott: quasi nero, i margini netti
+    /* AL COMPUTER A TUTTO SCHERMO: la foto copre la finestra da bordo a
+       bordo, con margine per le finestre piu' larghe o piu' alte del foglio
+       (sborda di 200 di lato e 50 sopra). Stretta al centro con la penombra
+       intorno non aveva impatto. I disegni vanno dove la foto e' libera:
+       la fila in alto, sul terreno sopra le teste; il cuore sul tessuto. */
+    largo: { lastra: 'piano-tessuto.webp', davanti: null,
+             /* alzata: in cima c'era terreno vuoto e il nome copriva i
+                piedi. I disegni stanno nel tratto libero fra le due teste */
+             /* 2 ott: un po' piu' piccola (0,9), cosi' sopra le teste si apre
+                terreno. Copre ancora la finestra anche a 16:9 (da -110 a
+                1510), e la lastra non ha piu' l'orlo spento: il suo bordo sta
+                sempre fuori dallo schermo */
+             figura: { x: -110, y: -50, l: 1620, a: 1215 },
+             /* una fila sola in alto: il cuore dov'era bio (e apre bio),
+                look!, mail piu' grande, e la porta che chiude la fila.
+                Bio e contacts qui non ci sono */
+             posti: { 'bio.svg':      { via: true },
+                      'contacts.svg': { via: true },
+                      /* una fila per tutta la larghezza: mail a sinistra,
+                         look!, la porta, il cuore a destra. Ai due capi i
+                         disegni stanno sopra le teste, e restano piu'
+                         piccoli; in mezzo c'e' posto. La porta e' piu' alta
+                         degli altri perche' lo e' il disegno: alla stessa
+                         altezza il suo tratto si vedrebbe piu' sottile */
+                      /* look! in alto al centro, fra le due teste; il cuore
+                         e mail FUORI dalle teste, sopra ciascuna verso il
+                         proprio bordo - il cuore a sinistra, mail a destra. La porta in basso incornicia lo
+                         stivale della ragazza di destra */
+                      'collab.svg':   { x:   40, y:  40, a: 160, g: -3 },
+                      'look.svg':     { x:  590, y:  40, a: 230, g: -2 },
+                      'mail.svg':     { x: 1195, y:  40, a: 160, g:  2 },
+                      'showroom.svg': { x:  830, y: 400, a: 490, g: -1.5, dietro: true, sotto: 140 } } },
+    alto:  { lastra: 'piano-cinghie.webp', davanti: null,
+             /* la lastra e' la fotografia nuda; la penombra la fa la
+                pagina. Il margine che avanza si divide fra sopra e sotto,
+                e tutti e due si sfumano: sopra quanto basta a dare aria
+                alla testa senza arrivare al viso, sotto dietro il nome. La
+                figura sta FERMA: lo spostamento delle mani qui non si fa */
+             /* IL FOGLIO E' PIU' LARGO, 890 invece di 700: e' la forma
+                (0,585) in cui la composizione e' stata decisa, guardandola.
+                Su un telefono piu' stretto non si taglia niente: si
+                rimpicciolisce tutto, e quel che avanza sopra e sotto e'
+                penombra, con la foto che ci sfuma dentro */
+             /* il nome: meno aria fra le lettere, cosi' a parita' di
+                larghezza le lettere sono piu' grandi, e intero */
+             foglio: { l: 890, aria: 1.0, firmaVisto: 1, firmaSu: true, cornice: 0.06 },
+             /* 2 ott: la lastra e' la foto nuda, dentro la cornice (vedi
+                LA CORNICE) */
+             figura: { x: -22, y: 0, l: 933, a: 1400, l0: 1400, a0: 2100 }, fermo: true,
+             sfuma: { alto:'0%', basso:'100%', coda:'0%', sx:'0%' },   // margini netti, nessuna sfumatura
+             /* in alto contacts e look! (look il piu' grande, fino al
+                bordo destro), in basso mail e la porta, che sale da dietro
+                il nome: sotto: quanto ci finisce dietro, misurato dal nome */
+             /* sotto il nome, ai lati del viso; il cuore sul petto, la
+                porta che sale dal fondo a destra */
+             /* sottoNome: la quota si conta dal fondo del nome, che sul
+                telefono vero e nel riquadro largo cade in punti diversi */
+             /* senza contacts: look! a sinistra e mail a destra, ai lati
+                del viso, alla stessa distanza dal bordo */
+             /* contacts in basso a sinistra, a bilanciare la porta: poca
+                aria dal fondo, ma non zero */
+             posti: { 'contacts.svg': { via: false, x:  60, a: 230, g: -2, sulFondo: 0, nelMargine: 0.6 },
+                      'look.svg':     { x:  24, y:  15, a: 310, g: -2, parolaSu: false, sottoNome: true },
+                      'mail.svg':     { x: 630, y:  60, a: 200, g:  2, sottoNome: true },
+                      'bio.svg':      { via: true },
+                      'showroom.svg': { x: 580, y: 1000, a: 520, g: -1.5, dietro: true, sotto: 0, nelMargine: 0.6, parolaSotto: true },
+                      'collab.svg':   { x: 357, y: 622, a: 260, sullaFoto: [0.406, 0.489, 0.186] } } }   // sul petto, con la foto
+  }
+};
+HERI.cinghie = HERI.bn;                 // il nome della prima prova
+var hero = HERI[(/[?&]hero=([a-z]+)/.exec(location.search) || [])[1]];
+if (hero) {
+  document.documentElement.classList.add('hero-' + hero.nome);
+  document.documentElement.style.setProperty('--fondo', hero.fondo);
+  document.documentElement.style.setProperty('--firma', hero.firma);
+}
+var dritta  = document.getElementById('dritta');
+
+/* ------------------------------------------------------------------ *
+ * LE DUE COMPOSIZIONI.
+ *
+ * Non e' la stessa pagina rimpicciolita: e' un'altra disposizione. Sul
+ * telefono la figura prende tutta la larghezza e quasi tutta l'altezza,
+ * e i disegni si spostano nelle due fasce di penombra, sopra e sotto.
+ *
+ * Il foglio alto e' 700x1520, cioe' la proporzione del telefono piu'
+ * stretto (0,46): cosi' su quello riempie esatto, e su uno piu' largo
+ * avanza solo un filo ai lati — che non si vede, perche' la pagina e'
+ * dello stesso colore.
+ *
+ * LA LASTRA PUO' DEBORDARE, e su tutti e due i fogli lo fa. L'orlo e'
+ * spento nel colore della pagina dentro l'immagine (costruisci-scuro.sh):
+ * quel che esce dal foglio non si stacca, perche' li' la lastra e' gia'
+ * diventata pagina. E' per questo che la figura puo' stare piu' larga del
+ * foglio senza che si veda un bordo.
+ *
+ * LA PENOMBRA E' SPAZIO BUONO. Sul piano bianco i disegni stavano nel
+ * vuoto accanto alla fotografia; qui la fotografia porta il suo vuoto con
+ * se' — sono i due terzi di lastra che il generatore le ha allungato
+ * intorno — e i disegni ci si appoggiano sopra.
+ * ------------------------------------------------------------------ */
+var FOGLI = {
+  largo: {
+    l: 1400, a: 900, stretta: 0.94, bordo: 26,
+    sfuma: { alto:'0%', basso:'100%', sx:'0%' },
+    /* LA LASTRA E' PIU' ALTA DEL FOGLIO e sborda sopra e sotto. Puo'
+     * farlo: ai bordi e' gia' del colore della pagina. Cosi' la figura e'
+     * grande quanto deve senza che intorno le si apra un deserto - la
+     * fotografia vera va da 400 a 1000, e restano quattrocento unita' per
+     * parte, che e' quanto serve ai disegni e non piu' di quanto serve. */
+    figura: { x: 191, y: -178, l: 938, a: 1139 },    // 2 ott: +15%, meno aria in testa
+    /* le mani davanti al nome: la punta delle dita a questa frazione della
+       sua banda, misurata dall'alto (vedi applica) */
+    mani: 0.5,
+    /* la testa della stanza: il titolo al centro, la freccia a sinistra */
+    /* IL TITOLO E' GRANDE. A corpo 126 la freccia da 38 sembrava una
+       virgola: cresce con lui, e si allinea al mezzo delle maiuscole. */
+    testa: { y: 58, corpo: 126, fx: 96, fy: 90, fa: 70 },   // 2 ott: freccia e busta +25%, stesso centro
+    posta: { a: 86, orlo: 54 },        // il francobollo in basso a destra
+    posti: {
+      /* 2 ottobre 2026: il cuore sul cuore di lei, al centro (e apre bio);
+       * mail in alto a sinistra e contacts in alto a destra, look! sotto
+       * mail; la porta grande nell'angolo in basso a destra, che sale da
+       * dietro il nome come sul telefono */
+      'bio.svg':      { via: true },
+      /* nello stesso punto della fotografia che sul telefono: il 52% della
+       * lastra in larghezza e il 56% in altezza (misurato) */
+      'collab.svg':   { x: 602, y: 425, a: 150, g: -3   },   // segue la figura: si spostano insieme
+      /* le due colonne si specchiano: a sinistra mail sopra e look! sotto,
+       * a destra contacts sopra e la porta sotto. Mail e contacts della
+       * stessa taglia e alla stessa quota; fra contacts e la porta lo stesso
+       * respiro che fra mail e look! */
+      /* 2 ott: senza contacts. A sinistra solo look!, piu' alto e piu'
+       * grande; a destra mail sopra la porta, un po' a sinistra del suo
+       * montante sinistro */
+      'contacts.svg': { via: true },
+      'look.svg':     { x:  80, y: 175, a: 340, g: -2   },
+      'mail.svg':     { x: 945, y:  70, a: 185, g:  3   },
+      'showroom.svg': { x:1070, y: 330, a: 560, g: -1.5, dietro: true, sotto: 100 }   // il fondo dietro il nome, non sotto lo schermo
+    }
+  },
+  alto: {
+    l: 700, a: 1520,
+    /* STRETTA UNO: il foglio riempie la larghezza esatta dello schermo, senza
+     * il filo di margine che ha il foglio largo. Serve perche' qui i disegni
+     * e il nome devono stare sugli STESSI due bordi, e un margine dell'uno e
+     * mezzo per cento su uno solo dei due si vedrebbe. */
+    stretta: 1,
+    /* BORDO ZERO: sul telefono i disegni arrivano ai bordi, e devono. Una
+     * fascia di rispetto larga ventisei su settecento lascia due strisce
+     * vuote ai lati che su uno schermo stretto si notano come un errore di
+     * impaginazione. Sul foglio largo il bordo resta, perche' li' lo spazio
+     * c'e' e il vuoto e' una scelta. */
+    bordo: 0,
+    /* IL NOME E' LARGO QUANTO LO SCHERMO, ne' piu' ne' meno: la V tocca il
+     * bordo sinistro e la A il destro, tutte e due intere. Si era provato a
+     * farlo debordare per renderlo piu' grande, ma cosi' la V e la A si
+     * perdevano, e soprattutto il nome finiva su bordi tutti suoi mentre i
+     * disegni ne avevano altri. Un foglio ha due bordi, non quattro.
+     * La grandezza si recupera dall'altra parte: se ne mostra quasi tutta
+     * l'altezza invece di tagliarne un quinto. */
+    firma: 1,
+    firmaVisto: 0.96,
+    /* IL TAGLIO IN FONDO, al 90% della lastra, con quattro punti di coda:
+     * e' un taglio e non una dissolvenza. L'orlo del tulle cade all'80% e le
+     * gambe arrivano al 97: tagliare al 90 vuol dire mezza coscia — il piano
+     * americano — e il taglio coincide col fondo dello schermo, quindi si
+     * legge come un'inquadratura. */
+    sfuma: { alto:'0%', basso:'90%', coda:'4%', sx:'0%' },
+    /* LA FIGURA STA A DESTRA, e non in mezzo. Il suo sguardo va a sinistra:
+     * una figura centrata lascia il vuoto dalla parte dove non guarda, e
+     * quel vuoto si legge come un errore invece che come aria. Spostandola,
+     * il vuoto passa davanti agli occhi, che e' dove serve — e' la regola
+     * piu' vecchia che c'e', si da' spazio allo sguardo e non alla nuca.
+     * Il suo corpo sta fra 50 e 730: a destra deborda di trenta, e va bene,
+     * perche' e' la manica di tulle che esce, non lei.
+     * E POCA ARIA SOPRA LA TESTA: la corona comincia a 265, appena sotto la
+     * fila dei quattro. Piu' su non si puo' andare senza toccarli; piu' giu'
+     * si apriva una fascia di penombra vuota che non diceva niente. */
+    figura: { x: -303, y: 0, l: 1308, a: 1589 },    // 30 set: da 90, troppa aria in testa
+    testa: { y: 44, corpo: 86, fx: 40, fy: 63, fa: 50 },   // 2 ott: +25%, stesso centro
+    posta: { a: 74, orlo: 38 },
+    /* UNA SCHERMATA DA TELEFONO, non una composizione rimpicciolita.
+     * I quattro piccoli in cima da un bordo all'altro, quattro colonne da
+     * 175 senza margini; le due porte in basso, negli angoli, appena sopra
+     * la banda del nome. In mezzo lei, che i disegni coprono un poco — e va
+     * bene: su uno schermo cosi' stretto o si copre qualcosa o si fa tutto
+     * piccolo, e piccolo e' peggio. */
+    posti: {
+      /* senza bio (1 ottobre 2026): in alto contacts e look!, in basso
+       * mail e la porta, grande, che sale dal fondo da dietro il nome */
+      'bio.svg':      { via: true },
+      'contacts.svg': { via: true },                       // 2 ott: tolto
+      'look.svg':     { x: 400, y: 120, a: 255, g:  2, parolaSu: true },   // 2 ott: piu' giu' e a sinistra, la scritta sopra
+      'mail.svg':     { x:  70, y: 930, a: 175, g:  3   },
+      'collab.svg':   { x: 310, y: 833, a: 160, g: -3   },   // sale con la figura
+      'showroom.svg': { x: 400, y:1080, a: 440, g: -1.5, dietro: true }
+    }
+  }
+};
+
+/* la versione scelta sovrascrive, foglio per foglio, la figura e i posti */
+if (hero) ['largo', 'alto'].forEach(function (q) {
+  var h = hero[q], f = FOGLI[q];
+  if (h.figura) f.figura = h.figura;
+  if (h.sfuma) f.sfuma = h.sfuma;
+  if (h.foglio) for (var k0 in h.foglio) f[k0] = h.foglio[k0];
+  if (!h.davanti) f.mani = null;          // senza scontorno, niente mani sul nome
+  for (var n in (h.posti || {})) for (var k in h.posti[n]) f.posti[n][k] = h.posti[n][k];
+});
+
+var DISEGNI = ['bio.svg','collab.svg','look.svg','mail.svg','contacts.svg','showroom.svg'];
+
+/* LA SCRITTA SOPRA IL DISEGNO. Nel file la porta e la parola sono un
+ * tracciato solo, e tagliarlo vorrebbe dire mettere le mani nel segno.
+ * Non serve: fra le due c'e' una banda vuota — misurata, va da 902,6 a
+ * 910,4 del riquadro — quindi basta mostrare lo STESSO disegno due volte
+ * da due finestre diverse e impilarle al contrario. Il segno non si tocca,
+ * e se Vittoria ridisegna la porta si rimisura la banda e basta. */
+var SPACCA = { 'showroom.svg': 906 };
+/* IL DISEGNO E LA SUA PAROLA (2 ottobre 2026). Alla carezza cresce solo il
+ * disegno, la parola resta ferma. Nei file sono un tracciato solo, ma fra
+ * i due c'e' una banda vuota, misurata: qui la quota del taglio, in unita'
+ * del riquadro. Mail non ce l'ha - la M sale piu' in alto dell'angolo della
+ * busta - e si taglia a gradino: a sinistra di x a quota y, a destra a y2.
+ * La porta ha gia' le sue due finestre (SPACCA). */
+var PAROLA = {
+  'bio.svg':      { y: 728 },
+  'collab.svg':   { y: 760 },
+  'look.svg':     { y: 800 },
+  'contacts.svg': { y: 820 },
+  'mail.svg':     { y: 720, x: 600, y2: 740 },
+  'showroom.svg': { y: 906 }        // nel file la porta e' sopra e la parola sotto
+};
+/* DUE STRATI: lo stesso disegno due volte, uno sull'altro - sopra solo il
+ * disegno (.tratto), sotto solo la parola (.parola). E' quello che fa
+ * crescere alla carezza solo il disegno, dappertutto: sul piano, negli
+ * angoli delle stanze, nelle pagine (pagine.js lo chiede a window). */
+function dueStrati(svg, P) {
+  var lar = svg.viewBox.baseVal.width, alt = svg.viewBox.baseVal.height;
+  var pc = function (v, u) { return (v / u * 100).toFixed(2) + '%'; };
+  var y = pc(P.y, alt), y2 = pc(P.y2 || P.y, alt), x = pc(P.x || 0, lar);
+  var w = document.createElement('span'); w.className = 'dis';
+  var t = document.createElement('span'); t.className = 'tratto';
+  t.style.clipPath = 'polygon(0 0, 100% 0, 100% ' + y2 + ', ' + x + ' ' + y2 + ', ' + x + ' ' + y + ', 0 ' + y + ')';
+  t.style.transformOrigin = '50% ' + pc(P.y / 2, alt);
+  t.appendChild(svg);
+  var p = document.createElement('span'); p.className = 'parola';
+  p.style.clipPath = 'polygon(0 ' + y + ', ' + x + ' ' + y + ', ' + x + ' ' + y2 + ', 100% ' + y2 + ', 100% 100%, 0 100%)';
+  p.appendChild(svg.cloneNode(true));
+  w.appendChild(t); w.appendChild(p);
+  return w;
+}
+window.PAROLA = PAROLA; window.dueStrati = dueStrati;
+
+/* LA PORTA CHE SI APRE (2 ottobre 2026), fatta coi tratti che ci sono: lo
+ * stesso disegno usato due volte. Lo STIPITE e' il disegno intero meno la
+ * maniglia, e resta fermo; l'ANTA e' il contorno con la maniglia, scura
+ * dentro, e gira sui cardini - a destra, perche' la maniglia e' a sinistra.
+ * Fra i due, nel vano, il bianco della galleria. Le misure sono del disegno
+ * (unita' del riquadro, 705,4 x 1084): il vano va da 90 a 625 in larghezza
+ * e da 70 a 880 in altezza, la maniglia sta in 140-235 x 415-525, i cardini
+ * a 630, la porta finisce a 906 e sotto c'e' la parola. */
+var PORTA = {
+  /* il vano segue la porta disegnata, che e' storta: quattro angoli */
+  vano: [[140, 72], [640, 82], [530, 872], [92, 882]],
+  maniglia: [140, 415, 235, 525], cardini: 600, fine: 906, lar: 705.4, alt: 1084, gradi: 30 };
+function costruisciPorta(b, html) {
+  var tmp = document.createElement('div'); tmp.innerHTML = html || '';
+  var base = tmp.querySelector('svg'); if (!base) { b.innerHTML = html || ''; return; }
+  base = base.cloneNode(true);
+  base.removeAttribute('style');
+  var NS = 'http://www.w3.org/2000/svg', P = PORTA;
+  function ritaglio(svg, id, d) {
+    var cp = document.createElementNS(NS, 'clipPath'); cp.setAttribute('id', id);
+    var pa = document.createElementNS(NS, 'path'); pa.setAttribute('d', d);
+    pa.setAttribute('clip-rule', 'evenodd'); cp.appendChild(pa);
+    svg.insertBefore(cp, svg.firstChild);
+    svg.querySelectorAll('path:not(clipPath path)').forEach(function (q) { q.setAttribute('clip-path', 'url(#' + id + ')'); });
+  }
+  var q = elP('span', 'pp-quadro');
+  q.style.aspectRatio = P.lar + ' / ' + P.alt;
+  var pc = function (v, u) { return (v / u * 100).toFixed(2) + '%'; };
+  /* LA PORTA H (2 ottobre 2026): il "totale" e' la cornice senza maniglia
+   * col vano tutto bianco - porta-vano.png e' l'interno esatto del disegno.
+   * Sopra, l'anta disegnata col solo tratto (con la maniglia) che si apre
+   * verso dentro, obliqua. Tutto sta in UNO spazio 3D (preserve-3d): chi
+   * avvicina la porta (apriLaPorta, la fine di bio) muove una telecamera, e
+   * l'anta cambia scorcio da se'. Il tratto dell'anta passa dal colore del
+   * segno allo scuro mentre arriva il bianco, cosi' sul bianco si legge. */
+  var vano = elP('span', 'pp-vano');
+  var stipite = base.cloneNode(true), m = P.maniglia;
+  ritaglio(stipite, 'pp-senza-maniglia', 'M0 0H' + P.lar + 'V' + P.alt + 'H0Z M' + m[0] + ' ' + m[1] + 'H' + m[2] + 'V' + m[3] + 'H' + m[0] + 'Z');
+  var an = elP('span', 'pp-anta'); an.style.transformOrigin = pc(P.cardini, P.lar) + ' 50%';
+  var fa = base.cloneNode(true);
+  ritaglio(fa, 'pp-solo-porta', 'M0 0H' + P.lar + 'V' + P.fine + 'H0Z');
+  an.appendChild(fa);
+  q.appendChild(vano); q.appendChild(stipite); q.appendChild(an);
+  b.appendChild(q);
+  var chiaro = null;
+  /* a: 0 chiusa, 1 aperta (30 gradi); oltre 1 si spinge ancora (fino a 2) */
+  b.apriPorta = function (a) {
+    if (chiaro === null) chiaro = getComputedStyle(b).color;
+    /* verso dentro, come H: la prospettiva e' della porta (pp-quadro), e
+       l'anta si disegna sopra il bianco perche' viene dopo */
+    an.style.transform = 'rotateY(' + (-P.gradi * a).toFixed(2) + 'deg)';
+    var w = Math.min(1, a * 1.6);
+    vano.style.opacity = w.toFixed(3);
+    an.style.color = w > 0.5 ? '#1B1B1B' : '';       // aperta, scura sul bianco
+  };
+  b.apriPorta(0);
+}
+
+function elP(tag, cls) { var e = document.createElement(tag); e.className = cls; return e; }
+window.costruisciPorta = costruisciPorta;
+
+/* OGNI PORTA SI APRE (2 ottobre 2026). Toccata una porta di showroom -
+ * sul piano, nell'angolo di look!, nelle fasce delle pagine - si apre li'
+ * dov'e', poi ci si entra fino al bianco della galleria, e solo allora si
+ * entra in showroom. La fine di bio la apre da se' (vai con aperta). */
+var toccato = null;
+addEventListener('pointerdown', function (e) { toccato = e.target.closest && e.target.closest('button'); }, true);
+var SVG_PORTA = '';
+fetch(fresco('showroom.svg')).then(function (r) { return r.text(); }).then(function (t) {
+  var svg = new DOMParser().parseFromString(t, 'image/svg+xml').documentElement;
+  var fondo = svg.querySelector('rect'); if (fondo) fondo.remove();
+  svg.querySelectorAll('path').forEach(function (p) { p.setAttribute('fill', 'currentColor'); });
+  svg.removeAttribute('width'); svg.removeAttribute('height');
+  SVG_PORTA = new XMLSerializer().serializeToString(svg);
+}).catch(function () {});
+function apriLaPorta(poi) {
+  var calma = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var src = toccato && toccato.querySelector && toccato.querySelector('.tratto, .pp-quadro');
+  if (calma || !SVG_PORTA || !src) { poi(); return; }
+  var r = src.getBoundingClientRect(); if (!(r.width > 0)) { poi(); return; }
+  var P = PORTA, colore = getComputedStyle(src).color;
+  var fondoPagina = getComputedStyle(document.body).backgroundColor;
+  var strato = elP('div', 'pp-strato');
+  var porta = elP('div', 'pp-volo');
+  /* la finestra toccata e' la porta senza la parola; una porta gia' intera
+     (pp-quadro, la fine di bio) e' gia' della misura giusta */
+  var qh = src.classList.contains('pp-quadro') ? r.height : r.height * P.alt / P.fine;
+  porta.style.cssText = 'position:absolute;left:' + r.left + 'px;top:' + r.top + 'px;height:' + qh + 'px;color:' + colore + ';transform-origin:51% 43%';
+  costruisciPorta(porta, SVG_PORTA);
+  strato.appendChild(porta);
+  document.body.appendChild(strato);
+  var nascosto = toccato; nascosto.style.visibility = 'hidden';
+  /* la porta si apre li' dov'e' (come in H) MENTRE parte la transizione di
+     sempre: nessuna attesa, showroom si apre veloce come le altre stanze.
+     L'apertura e' una transizione CSS, non un ciclo di fotogrammi */
+  porta.classList.add('pp-scatta');
+  porta.getBoundingClientRect();                         // fissa lo stato chiuso
+  if (porta.apriPorta) porta.apriPorta(1);
+  poi();
+  /* la porta si apre in 0,3 s e intanto il piano se ne va: lei svanisce dopo */
+  strato.style.transition = 'opacity .3s ease .25s'; strato.style.opacity = '0';
+  setTimeout(function () { nascosto.style.visibility = ''; strato.remove(); }, 650);
+}
+
+/* LE STANZE. look! porta nel campo di riquadri, che e' demo/tuffo.html
+ * rifatto senza libreria; showroom nell'EDIFICIO, una stanza per lavoro
+ * (edificio.js, dal 21 settembre 2026: prima c'erano la galleria e il set,
+ * provini.js ed elica.js, che restano come strada vecchia). Il file si
+ * chiede solo quando ci si entra — chi non ci va non lo scarica nemmeno. */
+/* Dentro una stanza non c'e' nessuna dritta scritta: c'e' la freccia, e
+ * basta guardarla. Le istruzioni servivano quando la via d'uscita era un
+ * disegno nell'angolo che nessuno riconosceva come tale. */
+/* bio, collab, mail e contacts sono pagine da leggere, e stanno tutte e
+ * quattro in pagine.js: un file, quattro motori. */
+/* OGNI STANZA DICE I SUOI COLORI QUI, e non solo quando si accende. La
+ * prima volta il suo file si deve ancora scaricare, e intanto la pagina
+ * restava grigia: poi la stanza arrivava nera sopra il grigio, coi disegni
+ * e il nome ancora a meta' dissolvenza. Cosi' la pagina si veste appena si
+ * tocca il disegno; la stanza, accendendosi, ridice gli stessi colori. */
+var BUIO = ['#0B0B0C', '#F2F2F0'], GALLERIA = ['#F7F6F4', '#242D33'];
+var STANZE = {
+  'look.svg':     { file:'tuffo.js',    motore:'Tuffo',
+                    colori: /[?&]campo=bianco\b/.test(location.search) ? GALLERIA : BUIO },
+  'showroom.svg': { file:'edificio.js', motore:'Edificio', colori: GALLERIA },
+  'bio.svg':      { file:'pagine.js',   motore:'Bio',      colori: BUIO },
+  'collab.svg':   { file:'pagine.js',   motore:'Collab',   colori: GALLERIA },   // bianche, dal 30 set
+  'mail.svg':     { file:'pagine.js',   motore:'Posta',    colori: GALLERIA },
+  /* CONTACTS STA DENTRO BIO (1 ottobre 2026): il disegno apre bio, gia'
+     scorsa fino ai contatti (PIANO.dopo = { contatti: true }) */
+  'contacts.svg': { file:'pagine.js',   motore:'Bio',      colori: BUIO, dopo: { contatti: true } }
+};
+/* IL CUORE APRE BIO (1 ottobre 2026): il disegno di bio non c'e' piu',
+   in nessuna versione, e la sua stanza si raggiunge dal cuore. La stanza
+   di collab resta da parte, in attesa. */
+STANZE['collab.svg'] = STANZE['bio.svg'];
+var portate = {};
+
+function apriStanza(nome) {
+  var st = STANZE[nome];
+  if (!st) return;
+  if (st.dopo && !window.PIANO.dopo) window.PIANO.dopo = st.dopo;
+  function avvia() {
+    if (!dentro) return;                       // se ne e' gia' andato
+    var M = window[st.motore];
+    if (!M) { console.warn('piano: manca il motore ' + st.motore); return; }
+    var dove = st.nelFoglio ? foglio : document.body;
+    if (!M.accendi(dove, FOGLI[quale])) console.warn('piano: la stanza ' + st.motore + ' non si e\' aperta');
+  }
+  if (portate[st.file]) { avvia(); return; }
+  var sc = document.createElement('script');
+  sc.src = fresco(st.file);
+  sc.onload = function () { portate[st.file] = true; avvia(); };
+  sc.onerror = function () { console.warn('piano: non trovo ' + st.file); };
+  document.head.appendChild(sc);
+}
+function chiudiStanza() {
+  for (var nome in STANZE) {
+    var M = window[STANZE[nome].motore];
+    if (M && M.acceso()) M.spegni();
+  }
+}
+var bottoni = {};        // file -> bottone
+var quale = 'largo';     // 'largo' oppure 'alto'
+var dentro = null;
+
+/* LA FRECCIA si legge come i disegni: dal file, cosi' com'e'. */
+var titolo  = document.getElementById('titolo');
+var posta   = document.getElementById('scrivimi');
+var veloTesta = document.getElementById('velo-testa');
+/* NESSUNA STANZA HA IL TITOLO IN TESTA (30 settembre 2026): dove si e' lo
+   dicono le cose - il campo, la galleria, il nome in bio, la busta, i nomi
+   delle cose in contacts - e i disegni nelle fasce. Il titolo resta, vuoto,
+   per chi un giorno ne volesse uno. */
+var SENZA_TITOLO = { 'look.svg': true, 'showroom.svg': true, 'bio.svg': true, 'mail.svg': true,
+                     'collab.svg': true, 'contacts.svg': true };
+var NOMI = { 'bio.svg':'Bio', 'collab.svg':'Collab', 'look.svg':'Look!',
+             'mail.svg':'Mail', 'contacts.svg':'Contacts', 'showroom.svg':'Showroom' };
+var freccia = document.getElementById('indietro');
+var ANGOLI = [
+  { el: document.getElementById('angolo-porta'), file: 'showroom.svg', va: 'showroom.svg', lato: -1, alto: 2.8, gira: -2, fondo: 0.96 },
+  { el: document.getElementById('angolo-cuore'), file: 'collab.svg',   va: 'collab.svg',   lato:  1, alto: 0.96, gira:  3, fondo: 0.69 }   // sotto il cuore c'e' il posto della parola, vuoto
+];
+ANGOLI.forEach(function (g) {
+  g.el.style.setProperty('--gira', g.gira + 'deg');
+  g.el.addEventListener('click', function (e) { e.stopPropagation(); vai(g.va); });
+  fetch(fresco(g.file)).then(function (r) { return r.text(); }).then(function (t) {
+    var svg = new DOMParser().parseFromString(t, 'image/svg+xml').documentElement;
+    var fondo = svg.querySelector('rect'); if (fondo) fondo.remove();
+    var segno = svg.querySelector('path');
+    if (segno) segno.setAttribute('fill', g.file === 'collab.svg' ? 'url(#cuore-tinta)' : 'currentColor');
+    svg.removeAttribute('width'); svg.removeAttribute('height');
+    g.el.prop = svg.viewBox.baseVal.width / svg.viewBox.baseVal.height;
+    var nuovo = document.importNode(svg, true);
+    if (g.file === 'showroom.svg') {
+      /* due finestre: la porta (fino al taglio) e la parola (dopo) */
+      var T = PAROLA['showroom.svg'].y, lar = svg.viewBox.baseVal.width, alt = svg.viewBox.baseVal.height;
+      var tp = document.createElement('span'); tp.className = 'tratto';
+      var sp = nuovo.cloneNode(true); sp.setAttribute('viewBox', '0 0 ' + lar + ' ' + T); tp.appendChild(sp);
+      var np = document.createElement('span'); np.className = 'nome';
+      var sn = nuovo.cloneNode(true); sn.setAttribute('viewBox', '0 ' + T + ' ' + lar + ' ' + (alt - T)); np.appendChild(sn);
+      g.el.appendChild(tp); g.el.appendChild(np);
+      g.el.misure = { lar: lar, T: T, alt: alt };
+    } else if (PAROLA[g.file]) g.el.appendChild(dueStrati(nuovo, PAROLA[g.file]));
+    else g.el.appendChild(nuovo);
+    if (dentro) posaPosta(FOGLI[quale]);
+  }).catch(function () {});
+});
+fetch(fresco('mail.svg')).then(function (r) { return r.text(); }).then(function (t) {
+  var svg = new DOMParser().parseFromString(t, 'image/svg+xml').documentElement;
+  var fondo = svg.querySelector('rect'); if (fondo) fondo.remove();
+  var segno = svg.querySelector('path'); if (segno) segno.setAttribute('fill','currentColor');
+  svg.removeAttribute('width'); svg.removeAttribute('height');
+  posta.prop = svg.viewBox.baseVal.width / svg.viewBox.baseVal.height;
+  posta.appendChild(dueStrati(document.importNode(svg, true), PAROLA['mail.svg']));
+  if (dentro) posaPosta(FOGLI[quale]);
+}).catch(function () { console.warn('piano: non trovo mail.svg'); });
+
+fetch(fresco('freccia.svg')).then(function (r) { return r.text(); }).then(function (t) {
+  var svg = new DOMParser().parseFromString(t, 'image/svg+xml').documentElement;
+  svg.removeAttribute('width'); svg.removeAttribute('height');
+  freccia.prop = svg.viewBox.baseVal.width / svg.viewBox.baseVal.height;
+  freccia.appendChild(document.importNode(svg, true));
+  if (dentro) posaTesta(FOGLI[quale]);
+}).catch(function () { console.warn('piano: non trovo freccia.svg'); });
+
+/* Il foglio si sceglie dalla forma della finestra, non dai pixel: un
+ * telefono girato di lato e' largo, e vuole la composizione larga. */
+var forzato = /[?&](telefono|computer)\b/.exec(location.search);
+forzato = forzato && (forzato[1] === 'telefono' ? 'alto' : 'largo');
+function scegli(l, a) { return forzato || ((l / a < 0.9) ? 'alto' : 'largo'); }
+
+function misura() {
+  /* Si misura il DOCUMENTO, non la finestra: il foglio sta a top:50% e
+   * left:50% di quel riquadro li', e misurare qualcos'altro vuol dire
+   * scalarlo rispetto a una cosa e centrarlo rispetto a un'altra.
+   * (visualViewport no: cambia quando si fa la pinza per ingrandire, e
+   * la pagina si ricomporrebbe sotto le dita.)
+   * In altezza si prende la piu' piccola fra documento e finestra, se no
+   * su iPhone un pezzo finisce sotto la barra di Safari.
+   * E zero non e' una misura: a scheda nascosta si tiene l'ultima buona. */
+  var d = document.documentElement;
+  var l = d.clientWidth;
+  var a = Math.min(d.clientHeight || Infinity, innerHeight || Infinity);
+  if (!(l > 0 && a > 0 && isFinite(a))) return;
+
+  /* L'ORDINE CONTA, e non e' quello che verrebbe naturale. Il foglio e la
+   * scala si decidono PER PRIMI, perche' sul foglio alto la firma prende la
+   * sua larghezza dal foglio: misurarla prima vorrebbe dire misurarla sulla
+   * scala del foglio di prima. E il pavimento viene dopo la firma, perche'
+   * e' la firma a dire dov'e'. */
+  var nome = scegli(l, a), f = FOGLI[nome];
+  var scala = Math.min(l / f.l, a / f.a) * f.stretta;
+  var eraQuale = quale;
+  quale = nome; scalaOra = scala;
+  document.documentElement.style.setProperty('--scala', scala);
+  document.documentElement.classList.toggle('firma-su', !!f.firmaSu);
+  /* LA CORNICE senza tagli: la foto intera, larga quanto la cornice; lo
+     spazio che avanza in altezza si divide in tre parti uguali - sopra il
+     nome, fra il nome e la foto, sotto la foto. Se invece la foto e' troppo
+     alta, si stringe lei e i margini restano M. */
+  GIRO = 0;
+  if (f.cornice && firmaProp) {
+    /* niente margini ai lati: il nome e la foto da bordo a bordo, la foto
+       intera e mai rimpicciolita; quello che avanza in altezza si divide in
+       tre parti uguali - sopra il nome, fra il nome e la foto, sotto */
+    var nomeH = l * firmaProp, fh = l * f.figura.a0 / f.figura.l0;
+    GIRO = Math.max(0, (a - nomeH - fh) / 3);
+  }
+  document.documentElement.style.setProperty('--cornice', f.cornice ? GIRO + 'px' : '');
+
+  misuraFirma(); vestiFirma();
+  /* col nome in cima, dove finisce il nome, in unita' del foglio: i disegni
+     che chiedono sottoNome contano la loro quota da li' */
+  var tetto0 = tetto;
+  tetto = f.firmaSu && firmaProp ? f.a / 2 - a / 2 / scala + firma.getBoundingClientRect().bottom / scala : NaN;
+  var giu = misuraPavimento(f, a, scala);
+  var cambiato = Math.abs(giu - pavimento) > 1 || (isFinite(tetto) && !(Math.abs(tetto - tetto0) <= 1));
+  pavimento = giu;
+  if (nome !== eraQuale || cambiato) applica(f);
+}
+
+/* Mette il foglio scelto: misure del foglio, della figura, e di ogni
+ * disegno. Si chiama solo quando la composizione cambia davvero. */
+function applica(f) {
+  var r = document.documentElement.style;
+  r.setProperty('--fl', f.l); r.setProperty('--fa', f.a);
+  r.setProperty('--sfuma-alto', f.sfuma.alto);
+  r.setProperty('--sfuma-basso', f.sfuma.basso);
+  r.setProperty('--sfuma-coda', f.sfuma.coda || '10%');
+  r.setProperty('--sfuma-sx', f.sfuma.sx);
+  /* LE MANI SUL NOME. Il nome sta nella finestra e la figura nel foglio,
+   * quindi dove cadono le mani rispetto a lui dipende dalla forma della
+   * finestra: si misura, come il pavimento. La punta delle dita va a meta'
+   * della banda del nome; la figura si sposta al massimo di cento unita'
+   * per parte, se no una finestra strana la manderebbe fuori quadro. */
+  var fy = f.figura.y;
+  /* una figura che chiede sottoNome conta la quota dal fondo del nome */
+  if (f.figura.sottoNome && isFinite(tetto)) fy = tetto + fy;
+  /* LA CORNICE (2 ottobre 2026): un margine solo, M, uguale dappertutto -
+     sopra il nome, ai lati, fra il nome e la foto, sotto la foto. La foto
+     riempie il riquadro che resta (object-fit: cover, centrata): se il
+     riquadro e' piu' stretto di lei ne perde un po' ai lati. Niente cielo
+     inventato, niente sfumature. FOTO e' dove cade la foto intera, anche
+     la parte tagliata: e' su quella che si misura il cuore. */
+  FOTO = null; CORNICE = null;
+  if (f.cornice && isFinite(tetto) && isFinite(pavimento)) {
+    var Wf = document.documentElement.clientWidth / scalaOra;
+    var G = GIRO / scalaOra;                                 // il margine, uguale sopra e sotto
+    var cl = Wf, ca = Wf * f.figura.a0 / f.figura.l0, cy = tetto + G;
+    var k = cl / f.figura.l0;
+    var cx = f.l / 2 - cl / 2;
+    CORNICE = { x: cx, y: cy, l: cl, a: ca };
+    FOTO = { x: cx + (cl - f.figura.l0 * k) / 2, y: cy + (ca - f.figura.a0 * k) / 2,
+             l: f.figura.l0 * k, a: f.figura.a0 * k };
+  }
+  /* una versione che chiede la figura FERMA (fermo: true) non si sposta:
+     l'aria sopra la testa e' una scelta, non deve cambiare col telefono */
+  if (f.mani && !(hero && hero[quale].fermo) && isFinite(pavimento) && firmaProp && scalaOra > 0) {
+    var nomeAlto = firmaLarga() * firmaProp / scalaOra;
+    var dy = pavimento + nomeAlto * f.mani - (fy + MANI * f.figura.a);
+    fy += Math.max(-100, Math.min(100, dy));
+  }
+  if (CORNICE) { posa(figura, CORNICE.x, CORNICE.y, CORNICE.l, CORNICE.a); figura.style.objectFit = 'cover'; }
+  else { posa(figura, f.figura.x, fy, f.figura.l, f.figura.a); figura.style.objectFit = ''; }
+  /* la versione dell'hero sceglie la lastra per foglio: sul telefono una
+     fotografia, al computer un'altra */
+  if (hero) {
+    var h = hero[quale];
+    if (figura.getAttribute('src') !== h.lastra) figura.src = h.lastra;
+    if (h.davanti && davanti.getAttribute('src') !== h.davanti) davanti.src = h.davanti;
+    MANI = h.mani || MANI;
+  }
+  davanti.style.display = f.mani ? 'block' : 'none';
+  posa(davanti, f.figura.x, fy + DAVANTI * f.figura.a, f.figura.l, (1 - DAVANTI) * f.figura.a);
+  DISEGNI.forEach(function (nome) {
+    var b = bottoni[nome];
+    if (b && (!dentro || dentro.b !== b)) posaSezione(b, f.posti[nome]);
+    else if (b) b.style.opacity = '';
+  });
+  if (dentro) posaTesta(f);
+  /* se una stanza e' aperta e sa ridisporsi, il foglio nuovo la riguarda */
+  for (var nome2 in STANZE) {
+    var M = window[STANZE[nome2].motore];
+    if (M && M.acceso() && M.rifai) M.rifai(f);
+  }
+}
+/* IL PAVIMENTO E' LA FIRMA.
+ *
+ * Il nome sta nella FINESTRA e non nel foglio — "lungo tutta la schermata"
+ * vuol dire la schermata — quindi quanto foglio si mangia dipende dalla
+ * forma della finestra: piu' e' larga, piu' il nome e' alto, e piu' sale.
+ * Non e' un numero che si possa scrivere una volta nei FOGLI: si misura, a
+ * ogni ridisposizione.
+ *
+ * LA FIGURA LO PUO' ATTRAVERSARE, i disegni no. Il nome che passa davanti
+ * alle gambe e' una copertina; il nome che passa dietro la porta di
+ * showroom e' un pasticcio, e per giunta toglie leggibilita' a tutti e due.
+ * Quindi la firma e' la linea di terra: i sei ci stanno sopra.
+ *
+ * Qui non si avvisa nella consolle, come per il bordo. Il bordo e' un
+ * errore nei numeri; questo dipende da com'e' fatta la finestra di chi
+ * guarda, e non c'e' niente da correggere. */
+var pavimento = Infinity, tetto = NaN, FOTO = null, CORNICE = null, GIRO = 0;
+function misuraPavimento(f, alta, scala) {
+  /* col nome in cima (firmaSu) il pavimento e' il fondo della finestra */
+  if (f.firmaSu && scala > 0) return alta / 2 / scala + f.a / 2;
+  if (!firmaProp || !(scala > 0)) return f.a;
+  var firmaAlta = firmaLarga() * firmaProp;
+  var p = (alta / 2 - firmaAlta) / scala + f.a / 2;
+  /* una finestra sproporzionata non deve schiacciare la composizione in
+     cima: sotto una certa quota il nome si accetta cosi' com'e' */
+  return Math.max(p, f.a * 0.55);
+}
+function posa(el, x, y, l, a) {
+  el.style.left = x + 'px'; el.style.top = y + 'px';
+  el.style.width = l + 'px'; el.style.height = a + 'px';
+}
+function posaSezione(b, p) {
+  /* un disegno che la versione toglie (via: true) non si posa: sparisce */
+  b.style.display = p.via ? 'none' : '';
+  if (p.via) return;
+  b.classList.toggle('su', !!p.parolaSu);
+  b.classList.toggle('giu', !!p.parolaSotto);
+  b.style.setProperty('--gira', p.g + 'deg');
+  /* la stessa crescita in millimetri per tutti: 17 su un disegno alto 150
+   * e' l'11%, su uno alto 335 e' il 5%. Con una percentuale sola il grande
+   * cresceva il doppio del piccolo, e sembrava che non facesse niente. */
+  b.style.setProperty('--cresci', 1 + Math.min(0.10, Math.max(0.035, 17 / p.a)));
+
+  /* NESSUN DISEGNO PUO' ESSERE TAGLIATO. Non e' una raccomandazione a me
+   * stesso: e' una tenaglia. Ogni disegno viene tenuto dentro il foglio
+   * con un bordo di rispetto — largo abbastanza da contenere anche la
+   * carezza, che alza di 10 e allarga di 17 (8,5 per lato).
+   * Il foglio sta sempre tutto nella finestra, quindi dentro il foglio
+   * vuol dire dentro lo schermo. Se una posizione sbatte contro il bordo
+   * viene spostata, e lo dice nella consolle: cosi' non succede in
+   * silenzio, e si sa che quel numero va corretto. */
+  var f = FOGLI[quale], m = f.bordo;
+  if (p.sottoNome && isFinite(tetto)) p = Object.assign({}, p, { y: Math.round(tetto + p.y) });
+  /* sullaFoto: [x, y, altezza] in frazioni della foto - il cuore sta sul
+     petto comunque la foto sia grande */
+  if (p.sullaFoto && FOTO) {
+    var q = p.sullaFoto, qa = Math.round(q[2] * FOTO.a);
+    posa(b, Math.round(FOTO.x + q[0] * FOTO.l), Math.round(FOTO.y + q[1] * FOTO.a),
+         Math.round(qa * b.prop), qa);
+    b.style.setProperty('--cresci', 1 + Math.min(0.10, Math.max(0.035, 17 / qa)));
+    return;
+  }
+  /* sulFondo: il disegno poggia sul fondo della finestra (il pavimento),
+     lasciandogli sotto tanta aria quanto dice. Puo' uscire dal foglio, se la
+     finestra e' piu' alta di lui: e' la finestra che conta */
+  /* nella cornice il fondo e' quello della foto; nelMargine lo sposta giu'
+     di quella frazione del margine sotto, cosi' il disegno sta un po' sulla
+     foto e un po' sul margine */
+  var fondo = CORNICE ? CORNICE.y + CORNICE.a + (p.nelMargine || 0) * GIRO / scalaOra : pavimento;
+  if (p.sulFondo != null && isFinite(fondo)) {
+    posa(b, Math.min(Math.max(p.x, m), f.l - m - Math.round(p.a * b.prop)),
+         Math.round(fondo - p.sulFondo - p.a), Math.round(p.a * b.prop), p.a);
+    return;
+  }
+  var l = Math.round(p.a * b.prop);
+  var x = Math.min(Math.max(p.x, m), f.l - m - l);
+  var y = Math.min(Math.max(p.y, m), f.a - m - p.a);
+  /* UN DISEGNO PUO' STARE DIETRO AL NOME, se lo chiede (dietro: true): la
+     porta di showroom, nel bianco e nero sul telefono, sale dal fondo da
+     dietro VITTORIA - purche' la maniglia resti sopra la scritta, e questo
+     lo decidono i numeri del posto. Il nome e' davanti al foglio, quindi
+     la copre senza bisogno d'altro. */
+  /* con sotto, la porta si appoggia al nome ovunque esso cada: la sua base
+     scende sotto il pavimento di tanto, anche quando il nome sta nella
+     penombra sotto il foglio */
+  if (p.dietro && p.sotto != null && isFinite(pavimento)) {
+    var fondo2 = CORNICE ? CORNICE.y + CORNICE.a + (p.nelMargine || 0) * GIRO / scalaOra : pavimento;
+    posa(b, p.x, Math.round(fondo2) + p.sotto - p.a, l, p.a); return;
+  }
+  if (p.dietro) { posa(b, p.x, Math.max(p.y, m), l, p.a); return; }   // e puo' uscire di lato
+  if (x !== p.x || y !== p.y) {
+    console.warn('piano: "' + b.getAttribute('aria-label') + '" toccava il bordo del foglio ' +
+                 quale + ' — spostato da ' + p.x + ',' + p.y + ' a ' + x + ',' + y);
+  }
+  /* e poi il pavimento, che a finestra larga sta piu' in alto del bordo */
+  var yf = Math.round(pavimento) - m / 2 - p.a;
+  if (yf >= m && yf < y) y = yf;
+  posa(b, x, y, l, p.a);
+}
+/* LA TESTA della stanza: il titolo composto in alto al centro, e la
+ * freccia a sinistra, alla sua altezza. Il disegno della sezione non
+ * resta piu': in una stanza c'e' la parola, non il segno. */
+function posaTesta(f) {
+  var t = f.testa;
+  titolo.style.top = t.y + 'px';
+  adattaTitolo(f);
+  /* il velo segue il titolo, ma non oltre un quarto abbondante del
+     foglio: con un titolo grande sbiancherebbe mezza stanza */
+  /* l'altezza viene dal foglio ma il velo sta sullo schermo: si converte
+     con la scala, se no su un foglio rimpicciolito copre mezza pagina */
+  var alta = Math.round(Math.min(f.a * 0.28, t.y + t.corpo * 1.9) * (scalaOra || 1));
+  veloTesta.style.height = alta + 'px';
+  /* e lo dice alle stanze: le pagine da leggere cominciano sotto la testa,
+     cosi' il testo non passa sotto la freccia */
+  document.documentElement.style.setProperty('--testa-alta', alta + 'px');
+  posaPosta(f);                        // anche la freccia: e' un angolo
+}
+
+/* IL FRANCOBOLLO sta in basso a destra. Le misure vengono dal foglio,
+ * cosi' cambiano con lui. */
+/* LA BUSTA STA IN ALTO A DESTRA, di fronte alla freccia (30 settembre 2026):
+   stessa altezza, stesso margine dal bordo. Era in basso a destra, e nelle
+   pagine da leggere stava in alto: adesso e' sempre nello stesso posto. */
+/* GLI ANGOLI DELLE STANZE si misurano sullo SCHERMO, non sul foglio
+ * (2 ottobre 2026). Il foglio cambia con la versione - quello del telefono
+ * in bianco e nero e' piu' largo - e con lui cambiavano freccia, busta,
+ * porta e cuore: dentro le stanze ogni versione aveva i suoi. Adesso un
+ * margine solo, uguale in orizzontale e in verticale, e misure prese dal
+ * lato corto della finestra: le stesse in tutte le versioni. */
+var ANGOLO = { margine: 0.065, freccia: 0.075, busta: 1.95 };   // frazioni del lato corto; la busta in frecce
+function angoli(f) {
+  var d = document.documentElement, W = d.clientWidth;
+  var H = Math.min(d.clientHeight || Infinity, innerHeight || Infinity), s = scalaOra || 1;
+  var B = Math.min(W, H), m = ANGOLO.margine * B / s;
+  var ox = f.l / 2 - W / 2 / s, oy = f.a / 2 - H / 2 / s;
+  return { x0: ox + m, y0: oy + m, x1: ox + W / s - m, y1: oy + H / s - m,
+           fa: ANGOLO.freccia * B / s };
+}
+function posaPosta(f) {
+  var A = angoli(f), a = Math.round(A.fa * ANGOLO.busta);
+  /* la riga in alto: la busta tocca il margine, la freccia le sta in mezzo */
+  if (freccia.prop) posa(freccia, Math.round(A.x0), Math.round(A.y0 + a / 2 - A.fa / 2),
+                         Math.round(A.fa * freccia.prop), Math.round(A.fa));
+  if (!posta.prop) return;
+  var l = Math.round(a * posta.prop);
+  posa(posta, Math.round(A.x1 - l), Math.round(A.y0), l, a);
+  /* la riga in basso: porta e cuore poggiano sul margine con l'inchiostro,
+     non col riquadro (fondo e' dove finisce il segno). La porta e' piu'
+     alta: e' cosi' che il suo tratto pesa come quello degli altri */
+  (ANGOLI || []).forEach(function (g) {
+    if (!g.el.prop) return;
+    var ga = Math.round(a * g.alto), gl = Math.round(ga * g.el.prop);
+    if (g.el.misure) {
+      /* LA PORTA: il disegno alto ga sopra; la parola alla scala che rende
+         l'inchiostro di SHOWROOM alto quanto quello di MAIL (297 unita' su
+         1062,6 la busta; 131 la parola della porta) */
+      var Mi = g.el.misure, kd = ga / Mi.alt, kw = (a * 297 / 1062.6) / 131;
+      var dl = Mi.lar * kd, dh = Mi.T * kd, wl = Mi.lar * kw, wh = (Mi.alt - Mi.T) * kw;
+      var tp = g.el.children[0], np = g.el.children[1];
+      tp.style.width = dl + 'px'; tp.style.height = dh + 'px';
+      np.style.width = wl + 'px'; np.style.height = wh + 'px';
+      var bl = Math.max(dl, wl), bh = dh + wh;
+      var inch = dh + wh * (1043 - Mi.T) / (Mi.alt - Mi.T);         // dove finisce l'inchiostro
+      posa(g.el, Math.round(g.lato < 0 ? A.x0 : A.x1 - bl), Math.round(A.y1 - inch), Math.round(bl), Math.round(bh));
+      return;
+    }
+    var gx = g.lato < 0 ? A.x0 : A.x1 - gl;
+    posa(g.el, Math.round(gx), Math.round(A.y1 - ga * (g.fondo || 1)), gl, ga);
+  });
+}
+
+/* IL FILO NON C'E' PIU' (22 settembre 2026). Correva lungo il fondo e
+ * finiva girando intorno al francobollo, per dire a che punto si era; nelle
+ * pagine passava sopra il testo come una sottolineatura, e il francobollo si
+ * trova benissimo da solo. PIANO.filo non esiste piu'. */
+
+/* LA FIRMA. Si misura l'INCHIOSTRO, non il corpo del carattere: getBBox
+ * su un testo SVG da' il riquadro vero delle lettere, e da li' si sa dove
+ * tagliare per nasconderne l'ultimo quinto. Il textLength allarga la parola
+ * esattamente quanto serve distribuendo lo spazio fra le lettere - e' quello
+ * che fa una testata, e non stira le forme. */
+var firma = document.getElementById('firma');
+var firmaTesto = document.getElementById('firma-testo');
+var firmaProp = 0, firmaB = null, firmaSu = 0, firmaAlto = 0, firmaNat = 0, firmaAria = 0;
+var CARATTERE = '800 expanded 100px system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif';
+/* QUANTA ARIA FRA LE LETTERE. Il Didot si allargava a mille, una misura
+   fissa; con un bastoni le lettere restavano piccole e lontanissime - una
+   fila di sassi. Si prende la parola com'e' e le si da' appena un po' di
+   spazio in piu': il nome riempie la larghezza con le lettere, non coi
+   vuoti. */
+var ARIA = 1.12;
+function misuraFirma() {
+  if (firmaProp) return;
+  var c = document.createElement('canvas').getContext('2d');
+  c.font = CARATTERE;
+  var nat = c.measureText('VITTORIA').width;
+  firmaNat = nat;
+  if (nat > 0) firmaTesto.setAttribute('textLength', Math.round(nat * (FOGLI[quale].aria || ARIA)));
+  var b;
+  try { b = firmaTesto.getBBox(); } catch (e) { return; }
+  if (!b || !b.width) return;
+
+  /* getBBox da' il riquadro di COMPOSIZIONE - ascendente e discendente del
+   * carattere - non quello dell'inchiostro. Sotto la linea di base di una
+   * parola tutta maiuscola non c'e' niente, quindi tagliando li' non si
+   * taglierebbe una lettera. L'inchiostro vero lo da' la tela: measureText
+   * restituisce di quanto sale e scende il segno davvero. */
+  var m = c.measureText('VITTORIA');
+  var su = m.actualBoundingBoxAscent, giu = m.actualBoundingBoxDescent;
+  if (!(su > 0)) return;
+  firmaB = b; firmaSu = su; firmaAlto = su + Math.max(0, giu);
+  firmaProp = 1;                             // misurata: il resto lo fa vestiFirma
+  vestiFirma();
+}
+/* QUANTO E' LARGO IL NOME, e da cosa lo prende.
+ *
+ * Sul foglio largo lo prende dalla FINESTRA: "lungo tutta la schermata"
+ * vuol dire la schermata, e il foglio - che sta sempre tutto dentro - e'
+ * piu' stretto.
+ * Sul foglio alto no: lo prende dal FOGLIO, per quel tanto in piu' che
+ * gli serve a debordare. Se lo prendesse dalla finestra, aprendo
+ * piano.html?telefono su uno schermo largo il foglio si stringerebbe in una
+ * colonna e il nome resterebbe grande quanto tutto lo schermo: quattro
+ * lettere alte mezza pagina dietro una composizione da telefono. E' successo,
+ * e non e' solo un difetto della prova - e' la stessa cosa che succede a un
+ * telefono girato di lato mentre la pagina sceglie ancora il foglio alto. */
+/* SUL TELEFONO VERO IL NOME PRENDE LO SCHERMO (30 settembre 2026). Preso
+ * dal foglio, su ogni telefono che non fosse il piu' stretto restavano due
+ * margini ai lati, perche' li' il foglio si ferma prima dei bordi. Il foglio
+ * resta la misura solo quando e' forzato (?telefono al computer), per non
+ * rifare le quattro lettere alte mezza pagina. */
+function firmaLarga() {
+  var f = FOGLI[quale];
+  /* nella cornice il nome e' largo quanto la finestra, da bordo a bordo */
+  if (f.cornice) return document.documentElement.clientWidth;
+  if (!f.firma) return innerWidth;
+  if (!forzato) return document.documentElement.clientWidth * f.firma;
+  return f.l * scalaOra * f.firma;
+}
+function vestiFirma() {
+  if (!firmaB) return;
+  /* QUANTO SE NE VEDE cambia col foglio. Sul largo l'ultimo quinto resta
+     sotto il bordo: il nome e' un fondale e non deve essere leggibile per
+     forza. Sul telefono no - li' il nome e' gia' proporzionalmente piccolo,
+     e tagliarne un quinto lo rimpicciolisce ancora. Se ne mostra quasi
+     tutto, e la fascia viene piu' alta a parita' di larghezza. */
+  var f = FOGLI[quale];
+  /* l'aria fra le lettere puo' cambiare col foglio (aria nel foglio): meno
+     aria, a parita' di larghezza, vuol dire lettere piu' grandi */
+  var aria = f.aria || ARIA;
+  if (firmaNat > 0 && aria !== firmaAria) {
+    firmaTesto.setAttribute('textLength', Math.round(firmaNat * aria));
+    try { firmaB = firmaTesto.getBBox(); } catch (e) {}
+    firmaAria = aria;
+  }
+  var visto = firmaAlto * (f.firmaVisto || 0.8);
+  firma.setAttribute('viewBox',
+    firmaB.x + ' ' + (-firmaSu) + ' ' + firmaB.width + ' ' + visto);
+  firmaProp = visto / firmaB.width;
+  var l = firmaLarga();
+  document.documentElement.style.setProperty('--firma-l', Math.round(l) + 'px');
+  firma.style.height = Math.round(l * firmaProp) + 'px';
+}
+/* SI RICHIAMA misura E NON misuraFirma: appena la firma si sa misurare
+   cambia il pavimento, e i sei disegni vanno rimessi sopra di lei. Prima
+   della misura il pavimento non esiste, e la composizione e' quella scritta
+   nei FOGLI. */
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(misura);
+setTimeout(misura, 60);
+misuraFirma();
+
+addEventListener('resize', misura);
+addEventListener('orientationchange', misura);
+document.addEventListener('visibilitychange', misura);
+if (window.visualViewport) visualViewport.addEventListener('resize', misura);
+
+/* ------------------------------------------------------------------ *
+ * I disegni arrivano dai file .svg cosi' come sono: si toglie il
+ * rettangolo di fondo e il nero del tratto diventa il colore del segno.
+ * Il file resta uno solo — si cambia il disegno, non il codice.
+ * ------------------------------------------------------------------ */
+/* LA DRITTA ASPETTA DUE COSE: che i disegni ci siano, e che si sia
+ * entrati davvero. Se il conto partisse al caricamento, i sei secondi se
+ * ne andrebbero mentre la mano sta ancora chiudendo, e chi arriva sul
+ * piano troverebbe la pagina senza nessuno che gli dice cosa fare. */
+var disegniPronti = false, entrato = false;
+function forseDritta() {
+  if (!disegniPronti || !entrato) return;
+  setTimeout(function () { dritta.classList.add('via'); }, 6000);
+}
+
+var mancanti = DISEGNI.length;
+DISEGNI.forEach(function (nome) {
+  fetch(fresco(nome)).then(function (r) { return r.text(); }).then(function (testo) {
+    var svg = new DOMParser().parseFromString(testo, 'image/svg+xml').documentElement;
+    var fondo = svg.querySelector('rect'); if (fondo) fondo.remove();
+    /* il cuore si riempie con la sua sfumatura, gli altri col colore del
+       segno: e' l'unica riga che sa di un disegno in particolare */
+    var segno = svg.querySelector('path');
+    if (segno) segno.setAttribute('fill',
+      nome === 'collab.svg' ? 'url(#cuore-tinta)' : 'currentColor');
+    svg.removeAttribute('width'); svg.removeAttribute('height');
+
+    var b = document.createElement('button');
+    b.className = 'sezione';
+    b.type = 'button';
+    b.prop = svg.viewBox.baseVal.width / svg.viewBox.baseVal.height;
+    b.setAttribute('aria-label', nome.replace('.svg', ''));
+    var dentroSvg = document.importNode(svg, true);
+    var taglio = SPACCA[nome], P = PAROLA[nome];
+    var lar = svg.viewBox.baseVal.width, alt = svg.viewBox.baseVal.height;
+    if (taglio) {
+      b.appendChild(finestra(dentroSvg, taglio, alt - taglio, alt));   // la parola
+      var porta = document.createElement('span');
+      porta.className = 'tratto';
+      porta.style.height = (taglio / alt * 100) + '%';
+      var fp = finestra(dentroSvg, 0, taglio, alt); fp.style.height = '100%';
+      porta.appendChild(fp);
+      b.appendChild(porta);                                            // la porta
+    } else if (P) {
+      /* due copie dello stesso disegno, una sull'altra: la prima tiene solo
+         il disegno, la seconda solo la parola */
+      var pc = function (v, u) { return (v / u * 100).toFixed(2) + '%'; };
+      var y = pc(P.y, alt), y2 = pc(P.y2 || P.y, alt), x = pc(P.x || 0, lar);
+      var su = 'polygon(0 0, 100% 0, 100% ' + y2 + ', ' + x + ' ' + y2 + ', ' + x + ' ' + y + ', 0 ' + y + ')';
+      var giu = 'polygon(0 ' + y + ', ' + x + ' ' + y + ', ' + x + ' ' + y2 + ', 100% ' + y2 + ', 100% 100%, 0 100%)';
+      b.style.setProperty('--disegno', (P.y / alt).toFixed(4));
+      b.style.setProperty('--parola', (1 - P.y / alt).toFixed(4));
+      var t = document.createElement('span'); t.className = 'tratto';
+      t.style.clipPath = su; t.style.transformOrigin = '50% ' + pc(P.y / 2, alt);
+      t.appendChild(dentroSvg);
+      var w = document.createElement('span'); w.className = 'parola';
+      w.style.clipPath = giu;
+      w.appendChild(dentroSvg.cloneNode(true));
+      b.appendChild(t); b.appendChild(w);
+    } else {
+      b.appendChild(dentroSvg);
+    }
+    b.addEventListener('click', function () {
+      if (dentro) torna();
+      else if (nome === 'showroom.svg') vai(nome);      // la porta prima si apre
+      else entra(b, nome);
+    });
+    foglio.appendChild(b);
+    bottoni[nome] = b;
+    posaSezione(b, FOGLI[quale].posti[nome]);
+    if (--mancanti === 0) { disegniPronti = true; forseDritta(); }
+  }).catch(function () { document.getElementById('guasto').hidden = false; });
+});
+
+/* Una finestra sul disegno: da y alta unita' del riquadro, messa a
+ * occupare la stessa frazione del bottone. Le due finestre insieme fanno
+ * il riquadro intero, quindi la proporzione del bottone non cambia. */
+function finestra(svg, y, alta, tutta) {
+  var f = svg.cloneNode(true);
+  f.setAttribute('viewBox', '0 ' + y + ' ' + svg.viewBox.baseVal.width + ' ' + alta);
+  f.style.height = (alta / tutta * 100) + '%';
+  f.style.display = 'block';
+  return f;
+}
+
+/* ------------------------------------------------------------------ *
+ * Entrare: tutto il resto svanisce, il disegno scelto va nell'angolo e
+ * resta li'. Dentro non c'e' niente — si prova il piano, non il contenuto.
+ * ------------------------------------------------------------------ */
+var MOLLA = 'left .7s cubic-bezier(.6,0,.2,1), top .7s cubic-bezier(.6,0,.2,1),' +
+            ' width .7s cubic-bezier(.6,0,.2,1), height .7s cubic-bezier(.6,0,.2,1),' +
+            ' transform .7s cubic-bezier(.6,0,.2,1), opacity .45s ease';
+function entra(b, nome) {
+  if (dentro) return;
+  dentro = { b: b, nome: nome };
+  b.classList.add('scelta');
+  b.style.transition = MOLLA;
+  titolo.textContent = SENZA_TITOLO[nome] ? '' : (NOMI[nome] || nome.replace('.svg',''));
+  posaTesta(FOGLI[quale]);
+  var c = STANZE[nome] && STANZE[nome].colori;
+  if (c) { sipario(c[0]); window.PIANO.veste(c[0], c[1]); }
+  document.body.classList.add('dentro');
+  document.body.dataset.stanza = nome;
+  dritta.classList.add('via');
+  arma();
+  apriStanza(nome);
+}
+function torna(perAndare) {
+  if (!dentro) return;
+  if (!perAndare) { disarma(); sipario('var(--fondo)'); }
+  chiudiStanza();
+  window.PIANO.sveste();
+  var b = dentro.b;
+  posaSezione(b, FOGLI[quale].posti[dentro.nome]);
+  b.classList.remove('scelta');
+  document.body.classList.remove('dentro');
+  delete document.body.dataset.stanza;
+  dentro = null;
+  setTimeout(function () { b.style.transition = ''; }, 800);
+}
+/* UN PASSO INDIETRO. Prima si chiede alla stanza: se ha un dentro suo -
+ * la galleria ha il set - torna di un livello e si ferma li'. Solo se non
+ * ha niente da disfare si esce dalla stanza. */
+/* IL TITOLO SI ADATTA. A corpo pieno "Senza titolo, V" non ci sta in riga
+ * sul foglio stretto e andrebbe a capo: si misura quanto e' lungo davvero e
+ * si scende quel tanto che basta. Non si manda a capo un titolo. */
+function adattaTitolo(f) {
+  var t = f.testa;
+  titolo.style.fontSize = t.corpo + 'px';
+  var largo = titolo.scrollWidth;
+  var posto = f.l - (t.fx + t.fa * 1.9) * 2;      // la freccia vuole il suo
+  if (largo > posto && largo > 0) {
+    titolo.style.fontSize = Math.floor(t.corpo * posto / largo) + 'px';
+  }
+}
+
+/* Le stanze possono cambiare il titolo in testa: il set ci mette il nome
+ * della fotografia aperta. */
+window.PIANO = {
+  titolo: function (t) { titolo.textContent = t; adattaTitolo(FOGLI[quale]); },
+  /* LA STANZA VESTE LA TESTA. Le passa il colore del suo fondo e quello del
+     suo segno; il velo sotto il titolo diventa una sfumatura di quel fondo.
+     Chi non chiama niente resta com'e': penombra e composto. */
+  veste: function (fondo, tratto) {
+    var r = document.documentElement.style;
+    r.setProperty('--stanza-fondo', fondo);
+    r.setProperty('--stanza-velo', velato(fondo));
+    r.setProperty('--stanza-tratto', tratto);
+    document.body.classList.add('vestita');
+    document.documentElement.classList.add('vestita');
+  },
+  sveste: function () {
+    document.body.classList.remove('vestita');
+    document.documentElement.classList.remove('vestita');
+  }
+};
+/* lo stesso colore, ma trasparente: in un gradiente servono due fermate
+   della stessa tinta, e "transparent" da solo vira al nero per strada */
+function velato(c) {
+  var m = /^#?([0-9a-f]{6})$/i.exec(c.trim());
+  if (!m) return 'rgba(0,0,0,0)';
+  var n = parseInt(m[1], 16);
+  return 'rgba(' + (n >> 16 & 255) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',0)';
+}
+
+function indietro() {
+  if (!dentro) return;
+  for (var nome in STANZE) {
+    var M = window[STANZE[nome].motore];
+    if (M && M.acceso() && M.indietro && M.indietro()) return;
+  }
+  torna();
+}
+freccia.addEventListener('click', function (e) { e.stopPropagation(); indietro(); });
+
+/* IL TASTO INDIETRO DEL BROWSER (30 settembre 2026). Il sito e' una pagina
+ * sola, e senza niente nella cronologia il gesto "indietro" del telefono -
+ * il bordo sinistro su iPhone, il tasto su Android - faceva USCIRE dal sito
+ * invece di tornare al piano. Adesso entrare in una stanza lascia un passo
+ * nella cronologia, e "indietro" fa quello che fa la freccia: chiude la
+ * pagina di un lavoro, rimanda al suo posto una fotografia portata davanti,
+ * o esce dalla stanza. Se la stanza aveva un livello in piu' da chiudere,
+ * il passo si rimette, cosi' il prossimo indietro esce davvero.
+ * Uscendo con la freccia il passo si consuma da solo (disarma), se no
+ * restava un indietro a vuoto. */
+var armato = false, ignoraPop = false;
+/* il sipario del colore d'arrivo: si fa ripartire ogni volta */
+function sipario(colore) {
+  var el = document.getElementById('sipario');
+  if (!el) return;
+  el.style.setProperty('--sipario', colore);
+  el.classList.remove('va'); void el.offsetWidth; el.classList.add('va');
+}
+function arma() {
+  if (armato || !history.pushState) return;
+  try { history.pushState({ piano: 'dentro' }, ''); armato = true; } catch (x) {}
+}
+function disarma() {
+  if (!armato) return;
+  armato = false; ignoraPop = true;
+  history.back();
+}
+addEventListener('popstate', function () {
+  if (ignoraPop) { ignoraPop = false; return; }
+  armato = false;
+  if (!dentro) return;
+  indietro();
+  if (dentro) arma();
+});
+/* DA UNA STANZA ALL'ALTRA senza ripassare dal piano: chi vuole scrivere
+   non deve rifare la strada. PIANO.vai porta dove si chiede, e puo'
+   lasciare un biglietto alla stanza che si apre (PIANO.dopo): collab lo
+   usa per mandare nell'edificio sulla soglia di un lavoro preciso.
+   PIANO.scrivi e' vai in posta: lo usano il francobollo, la stanza della
+   posta e il fondo di ogni pagina. */
+function vai(nome, opz) {
+  var b = bottoni[nome];
+  if (!b || (dentro && dentro.nome === nome)) return;
+  if (nome === 'showroom.svg' && !(opz && opz.aperta)) {
+    apriLaPorta(function () { vai(nome, Object.assign({}, opz || {}, { aperta: true })); });
+    return;
+  }
+  window.PIANO.dopo = opz || null;
+  if (!dentro) { entra(b, nome); return; }
+  torna(true);                 // si cambia stanza: il passo nella cronologia resta
+  setTimeout(function () { entra(b, nome); }, 40);
+}
+function scrivi() { vai('mail.svg'); }
+window.PIANO.vai = vai;
+window.PIANO.scrivi = scrivi;
+posta.addEventListener('click', function (e) { e.stopPropagation(); scrivi(); });
+addEventListener('keydown', function (e) { if (e.key === 'Escape') indietro(); });
+addEventListener('click', function (e) {
+  /* dentro una stanza il campo si tiene i suoi clic: trascinare per
+     girare non deve buttarti fuori */
+  /* NELLE STANZE DA ESPLORARE NON SI ESCE MAI COL FONDO (2 ottobre 2026):
+     in showroom e in look! si trascina, e un trascinamento che finiva sul
+     nome della sala, sulla dritta o fuori dalla tela contava come un clic
+     sul fondo e riportava al piano. Li' si esce solo con la freccia (o
+     col tasto indietro). */
+  if (dentro && (dentro.nome === 'showroom.svg' || dentro.nome === 'look.svg')) return;
+  if (dentro && !e.target.closest('.sezione') && !e.target.closest('#campo')
+             && !e.target.closest('#provini') && !e.target.closest('#indietro')
+             && !e.target.closest('#edificio') && !e.target.closest('#lavoro')
+             && !e.target.closest('#ed-sala') && !e.target.closest('.pg')) indietro();
+}, true);
+
+/* col dito si tocca, col mouse si clicca: la dritta lo dice giusto */
+var DRITTE = { it: ['tocca un disegno', 'clicca un disegno'],
+               en: ['tap a drawing',    'click a drawing'] };
+dritta.textContent = DRITTE[LINGUA][matchMedia('(hover: none)').matches ? 0 : 1];
+freccia.setAttribute('aria-label', LINGUA === 'en' ? 'back' : 'indietro');
+posta.setAttribute('aria-label', LINGUA === 'en' ? 'write to me' : 'scrivimi');
+
+applica(FOGLI.largo);
+misura();
+
+/* ------------------------------------------------------------------ *
+ * L'INGRESSO: la mano che chiude, e poi il piano.
+ *
+ * Il filmato sta davanti alla pagina gia' composta. Non c'e' niente da
+ * caricare alla fine — quando il velo se ne va, sotto c'era gia' tutto,
+ * nello stesso colore. Il velo non sparisce di colpo: si spegne in poco
+ * piu' di un secondo, che e' il tempo perche' i sei disegni bianchi
+ * emergano invece di comparire.
+ *
+ * Chi sta lavorando al piano non vuole rivedere la porta a ogni ricarica:
+ * piano.html?dritto entra e basta. E se hero.js non c'e', si entra dritti
+ * lo stesso — un ingresso che non si apre non deve chiudere la casa.
+ * ------------------------------------------------------------------ */
+var prima = document.getElementById('prima');
+
+/* ------------------------------------------------------------------ *
+ * L'ARRIVO, in tre tempi che si accavallano.
+ *
+ * 1. LA LASTRA SI POSA. Entra sfocata e un po' piu' piccola, e si mette a
+ *    fuoco: il movimento in avanti cominciato dalla mano continua qui e
+ *    finisce. Lo fa il foglio di stile, togliendo una classe — tre
+ *    transizioni di durata diversa, che e' quello che fa sembrare una cosa
+ *    posata e non incollata.
+ * 2. I DISEGNI, sparsi. Ognuno ha il suo ritardo, messo come proprieta'
+ *    sull'elemento: si tolgono alla fine, se no resterebbero addosso alla
+ *    carezza del mouse.
+ * 3. IL LUSTRO sul nome, da destra a sinistra, una volta sola. Arriva per
+ *    ultimo: e' la firma in fondo alla scena, non il titolo in cima.
+ *
+ * Chi ha chiesto di ridurre le animazioni non aspetta niente.
+ * ------------------------------------------------------------------ */
+var SPARSI_DA   = 520;   // quando compare il primo disegno: dopo che la
+                         // lastra si e' posata, non insieme a lei
+var SPARSI_OGNI = 300;   // e ogni quanto arriva il successivo — piu' della
+                         // durata della comparsa, cosi' non si accavallano
+var LUSTRO_DA   = 200;   // il lustro non aspetta la fine: e' quello che
+var LUSTRO_MS   = 1600;  // accompagna l'arrivo, non quello che lo saluta
+var ARRIVO_MS   = 2400;  // quanto dura tutto, ritardi compresi
+
+/* l'ordine sparso: si comincia dalla porta, che e' la piu' grande e la
+   piu' lontana dal centro, e si finisce sul cuore */
+var ORDINE = ['showroom.svg', 'bio.svg', 'look.svg', 'contacts.svg',
+              'mail.svg', 'collab.svg'];
+
+/* PER FAR PARTIRE UNA TRANSIZIONE BISOGNA PRIMA ARRIVARE ALLO STATO DI
+ * PARTENZA, E ARRIVARCI SENZA TRANSIZIONE.
+ *
+ * Senza questo succede una cosa che non si vede ma rovina tutto: si mette la
+ * classe, il browser comincia ad animare VERSO lo stato di partenza - e
+ * siccome ogni disegno ha il suo ritardo, non si e' ancora mosso niente -
+ * poi si toglie la classe, e quell'animazione torna indietro da dove non era
+ * nemmeno partita. Risultato: i disegni non sono mai spariti, e quando il
+ * nero se ne va ci sono gia' tutti, insieme. Lo stesso vale per la lastra,
+ * che non si sfocava per niente.
+ *
+ * Quindi: si spegne la transizione, si va allo stato di partenza, si forza
+ * il conto (offsetHeight), si riaccende la transizione. Da li' in poi
+ * togliere la classe anima davvero. */
+function senzaTransizione(fai) {
+  var tutti = [figura, davanti];     // anche le mani: se no restano un attimo sole sul nero
+  DISEGNI.forEach(function (n) { if (bottoni[n]) tutti.push(bottoni[n]); });
+  tutti.forEach(function (el) { el.style.transition = 'none'; });
+  fai();
+  void document.body.offsetHeight;
+  tutti.forEach(function (el) { el.style.transition = ''; });
+}
+
+function ritardi(quanto) {
+  ORDINE.forEach(function (nome, i) {
+    var b = bottoni[nome];
+    if (b) b.style.transitionDelay = quanto ? (SPARSI_DA + i * SPARSI_OGNI) + 'ms' : '';
+  });
+}
+
+/* IL LUSTRO. Le tre fermate di mezzo si spostano insieme da destra a
+   sinistra; quelle ai capi restano, cosi' fuori dalla striscia il nome e'
+   del suo colore. Alla fine l'attributo se ne va e il testo torna a
+   currentColor: il gradiente non e' come e' fatto il nome, e' una cosa
+   che gli passa sopra. */
+function lustra() {
+  var testo = document.getElementById('firma-testo');
+  var a = document.getElementById('lustro-a');
+  var b = document.getElementById('lustro-b');
+  var c = document.getElementById('lustro-c');
+  if (!testo || !a || !b || !c) return;
+  testo.setAttribute('fill', 'url(#lustro)');
+  var t0 = performance.now();
+  function fermo(el, v) {
+    el.setAttribute('offset', Math.max(0, Math.min(1, v)).toFixed(4));
+  }
+  function giro(ora) {
+    var k = Math.min(1, (ora - t0) / LUSTRO_MS);
+    var p = -0.34 + k * 1.68;                     // da sinistra verso destra
+    fermo(a, p - 0.26); fermo(b, p); fermo(c, p + 0.26);
+    if (k < 1) { requestAnimationFrame(giro); return; }
+    testo.removeAttribute('fill');
+  }
+  requestAnimationFrame(giro);
+}
+
+/* ------------------------------------------------------------------ *
+ * LA PARALLASSE.
+ *
+ * Tre piani a tre profondita': il foglio coi sei disegni davanti, la lastra
+ * dietro, e la firma quasi ferma. Muovendo il puntatore si spostano di
+ * quantita' diverse, e la penombra intorno a lei smette di essere un fondo e
+ * diventa uno spazio.
+ *
+ * CHI STA DAVANTI SI MUOVE DI PIU', ed e' l'unica regola: e' la stessa cosa
+ * che si vede dal finestrino, dove i pali corrono e le montagne stanno.
+ * Sedici pixel per i disegni, sette per la fotografia, cinque per il nome:
+ * poco, perche' la parallasse si deve sentire e non vedere.
+ *
+ * LA LASTRA STA DENTRO IL FOGLIO, quindi il suo spostamento si somma a
+ * quello del foglio e va tolto, non aggiunto: per farla muovere meno bisogna
+ * spingerla indietro. E siccome dentro il foglio si vive alla scala del
+ * foglio, quel che si toglie va diviso per la scala.
+ *
+ * SI INSEGUE, NON SI SALTA. Il puntatore da' la meta', e a ogni fotogramma
+ * ci si avvicina di un'ottavo: e' quello che fa sembrare che le cose abbiano
+ * un peso. Il giro si ferma da solo quando e' arrivato, e non gira a vuoto.
+ * ------------------------------------------------------------------ */
+var PARA = { foglio: [16, 10], lastra: [7, 4], firma: [5, 3] };
+var scalaOra = 1;
+var paraMeta = [0, 0], paraOra = [0, 0], paraGiro = null;
+
+function paraPasso() {
+  paraGiro = null;
+  var dx = paraMeta[0] - paraOra[0], dy = paraMeta[1] - paraOra[1];
+  paraOra[0] += dx * 0.12; paraOra[1] += dy * 0.12;
+  var r = document.documentElement.style;
+  /* la scala si tiene da parte invece di richiederla al foglio di stile:
+     chiederla a ogni fotogramma costringe il browser a rifare i conti di
+     tutta la pagina, sessanta volte al secondo, per un numero che sappiamo */
+  var scala = scalaOra || 1;
+  var fx = PARA.foglio[0] * paraOra[0], fy = PARA.foglio[1] * paraOra[1];
+  r.setProperty('--para-x', fx.toFixed(2) + 'px');
+  r.setProperty('--para-y', fy.toFixed(2) + 'px');
+  /* quel che manca alla lastra per muoversi solo di PARA.lastra */
+  r.setProperty('--fig-x', ((PARA.lastra[0] * paraOra[0] - fx) / scala).toFixed(2) + 'px');
+  r.setProperty('--fig-y', ((PARA.lastra[1] * paraOra[1] - fy) / scala).toFixed(2) + 'px');
+  r.setProperty('--fir-x', (PARA.firma[0] * paraOra[0]).toFixed(2) + 'px');
+  r.setProperty('--fir-y', (PARA.firma[1] * paraOra[1]).toFixed(2) + 'px');
+  if (Math.abs(dx) > 0.002 || Math.abs(dy) > 0.002) {
+    paraGiro = requestAnimationFrame(paraPasso);
+  }
+}
+function paraMira(x, y) {
+  paraMeta[0] = Math.max(-1, Math.min(1, (x / innerWidth  - 0.5) * 2));
+  paraMeta[1] = Math.max(-1, Math.min(1, (y / innerHeight - 0.5) * 2));
+  if (!paraGiro) paraGiro = requestAnimationFrame(paraPasso);
+}
+/* col dito non c'e' nessun puntatore che gironzola, e l'inclinazione vuole
+   un permesso da chiedere con un gesto: sul telefono la parallasse non c'e',
+   e non e' una mancanza - li' la mano che tiene il telefono e' gia' ferma. */
+if (!matchMedia('(hover: none)').matches) {
+  addEventListener('pointermove', function (e) {
+    if (CALMA) return;
+    /* dentro una stanza la parallasse torna a riposo invece di spegnersi
+       dove si trova: se no il foglio resta storto sotto una tela che non
+       lo sa, e quando si esce e' fuori squadra */
+    if (dentro) paraMira(innerWidth / 2, innerHeight / 2);
+    else paraMira(e.clientX, e.clientY);
+  }, { passive: true });
+  /* quando si entra in una stanza tutto torna a posto, se no il foglio
+     resta storto sotto una tela che non lo sa */
+  addEventListener('pointerleave', function () { paraMira(innerWidth/2, innerHeight/2); });
+}
+
+function finitoLArrivo() {
+  figura.classList.remove('arriva');
+  /* la classe se ne va per ultima: un disegno che fosse arrivato tardi -
+     un .svg lento, una rete storta - resterebbe altrimenti invisibile per
+     sempre, perche' nessuno gli toglie piu' la sfocatura */
+  document.body.classList.remove('accende');
+  ritardi(false);
+  forseDritta();
+}
+
+function apriIlPiano(conLArrivo) {
+  if (entrato) return;
+  entrato = true;
+  if (!conLArrivo || CALMA) {
+    document.body.classList.remove('accende');
+    if (prima) prima.remove();
+    document.body.classList.remove('prima');
+    finitoLArrivo();
+    return;
+  }
+  /* prima si mette la pagina allo stato di partenza — sfocata, piccola,
+     spenta — E POI si toglie il velo. Nell'ordine contrario ci sarebbe un
+     fotogramma di piano a fuoco, e sarebbe proprio il fotogramma che non
+     si deve vedere. */
+  figura.classList.add('arriva');
+  senzaTransizione(function () { document.body.classList.add('accende'); });
+  ritardi(true);
+  document.body.classList.remove('prima');
+  /* IL NERO SE NE VA MENTRE LA LASTRA ARRIVA, e non un istante prima. La
+     mano ha tappato l'obiettivo e lo schermo e' nero pieno: se il nero
+     sparisse di colpo si vedrebbe la penombra della pagina comparire dal
+     niente, che e' uno stacco. Cosi' invece sono due movimenti sovrapposti -
+     il buio che si alza e la fotografia che si mette a fuoco - e sembrano
+     la stessa cosa. */
+  if (prima) {
+    prima.classList.add('via');
+    setTimeout(function () { prima.remove(); }, 320);
+  }
+  requestAnimationFrame(function () {
+    document.body.classList.remove('accende');
+  });
+  setTimeout(lustra, LUSTRO_DA);
+  setTimeout(finitoLArrivo, ARRIVO_MS);
+}
+
+var CALMA = matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* DUE PORTE DI SERVIZIO, e servono a due lavori diversi:
+     ?dritto  entra e basta, senza filmato e senza arrivo — per lavorare
+              sulla composizione senza aspettare ogni volta
+     ?arrivo  salta il filmato ma fa l'arrivo — per guardare la messa a
+              fuoco venti volte di fila senza i quattro secondi di mano */
+if (/[?&]arrivo\b/.test(location.search)) {
+  /* si mostra il velo com'e' a fine filmato - nero pieno, senza filmato
+     sotto - e si fa partire l'arrivo da li': cosi' la prova e' la stessa
+     cosa che si vede davvero, meno i quattro secondi di mano */
+  if (prima) { prima.hidden = false; document.body.classList.add('prima'); }
+  setTimeout(function () { apriIlPiano(true); }, 60);
+} else if (/[?&]dritto\b/.test(location.search) || !window.Hero || !prima) {
+  apriIlPiano(false);
+} else {
+  document.body.classList.add('prima');
+  prima.hidden = false;
+  window.Hero.accendi({
+    verso: 'copre',
+    finito: function () { apriIlPiano(true); }
+  });
+}
+})();
+</script>
+</body>
+</html>

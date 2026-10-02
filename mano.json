@@ -1,0 +1,39 @@
+{
+ "nota": "artefatto di costruisci-mano.sh \u2014 non si modifica a mano",
+ "scoperto": 0.0586,
+ "coperto": 0.3689,
+ "fotogrammi": 97,
+ "fuoco": [
+  0.4688,
+  0.6178
+ ],
+ "pieno": 0.3125,
+ "mano": [
+  1.0,
+  0.9062
+ ],
+ "pellicola": {
+  "quanti": 97,
+  "passo": 41.67,
+  "largo": 420,
+  "alto": 564,
+  "colonne": 7,
+  "fogli": [
+   {
+    "file": "mano/foglio-1.webp",
+    "da": 0,
+    "quanti": 24
+   },
+   {
+    "file": "mano/foglio-2.webp",
+    "da": 24,
+    "quanti": 36
+   },
+   {
+    "file": "mano/foglio-3.webp",
+    "da": 60,
+    "quanti": 37
+   }
+  ]
+ }
+}

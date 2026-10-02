@@ -1,0 +1,43 @@
+{
+ "come": "Il colore della cornice disegnata di ogni fotografia, nello showroom e nella sua pagina. Si scrive un nome della tavolozza qui sotto, oppure un colore esadecimale (#AA3322). Per sapere quale fotografia e' quale: showroom con ?nomi in fondo all'indirizzo, e sotto ogni stampa c'e' il suo nome. Una fotografia che non c'e' qui prende \"tutte\". Le scelte del 30 settembre 2026: Moda paglia (il colore dei capelli, l'unico caldo del servizio), Fuori rosso pieno, le tre sparse ognuna il suo.",
+ "tavolozza": {
+  "inchiostro": "#242D33",
+  "nero": "#111111",
+  "rosso": "#E0301E",
+  "paglia": "#B8893A",
+  "blu notte": "#1F2E55",
+  "cobalto": "#2448C8",
+  "verde": "#2E8552",
+  "arancio": "#EE7A1E",
+  "grigio": "#9A9A96",
+  "bianco": "#FFFFFF"
+ },
+ "tutte": "inchiostro",
+ "cornici": {
+  "moda/01": "paglia",
+  "moda/02": "paglia",
+  "moda/03": "paglia",
+  "moda/04": "paglia",
+  "moda/05": "paglia",
+  "moda/06": "paglia",
+  "moda/07": "paglia",
+  "moda/08": "paglia",
+  "moda/09": "paglia",
+  "moda/10": "paglia",
+  "moda/11": "paglia",
+  "moda/12": "paglia",
+  "moda/13": "paglia",
+  "moda/14": "paglia",
+  "moda/15": "paglia",
+  "moda/16": "paglia",
+  "fuori/01": "rosso",
+  "fuori/02": "rosso",
+  "fuori/03": "rosso",
+  "fuori/04": "rosso",
+  "fuori/05": "rosso",
+  "fuori/06": "rosso",
+  "sparse/01": "cobalto",
+  "sparse/02": "verde",
+  "sparse/03": "arancio"
+ }
+}
